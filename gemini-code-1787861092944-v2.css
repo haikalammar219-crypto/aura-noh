@@ -156,6 +156,9 @@ nav a.active::after {
 }
 
 .btn-contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(135deg, var(--accent-gold), #aa820a);
     color: #000;
     padding: 10px 24px;

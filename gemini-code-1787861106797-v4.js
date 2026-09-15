@@ -53,12 +53,12 @@ function translateText(language) {
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'en' ? 'ltr' : 'rtl';
     const pageTitles = {
-        'Main-v3.html': ['AURA ENTERPRISE FZE LLC | الموقع الرسمي', 'AURA ENTERPRISE FZE LLC | Official Website'],
+        'Main-v4.html': ['AURA ENTERPRISE FZE LLC | الموقع الرسمي', 'AURA ENTERPRISE FZE LLC | Official Website'],
         'about.html': ['عن الشركة | AURA ENTERPRISE FZE LLC', 'About the Company | AURA ENTERPRISE FZE LLC'],
         'services.html': ['مجالات العمل | AURA ENTERPRISE FZE LLC', 'Fields of Work | AURA ENTERPRISE FZE LLC'],
         'contact.html': ['التواصل | AURA ENTERPRISE FZE LLC', 'Contact | AURA ENTERPRISE FZE LLC']
     };
-    const currentPage = window.location.pathname.split('/').pop() || 'Main-v3.html';
+    const currentPage = window.location.pathname.split('/').pop() || 'Main-v4.html';
     if (pageTitles[currentPage]) document.title = pageTitles[currentPage][language === 'en' ? 1 : 0];
     const toggle = document.getElementById('language-toggle');
     if (toggle) {
@@ -108,7 +108,7 @@ function updateReviewLanguage(language) {
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
 translateText(savedLanguage);
 
-const currentPage = window.location.pathname.split('/').pop() || 'Main-v3.html';
+const currentPage = window.location.pathname.split('/').pop() || 'Main-v4.html';
 document.querySelectorAll('nav a[href]').forEach(link => {
     if (link.getAttribute('href') === currentPage) link.classList.add('active');
 });

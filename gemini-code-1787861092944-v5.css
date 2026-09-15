@@ -529,9 +529,17 @@ section {
 }
 
 .rating-picker {
-    direction: rtl;
+    direction: ltr;
     display: inline-flex;
     gap: 3px;
+}
+
+body[dir="rtl"] .rating-picker {
+    direction: rtl;
+}
+
+body[dir="ltr"] .rating-picker {
+    direction: ltr;
 }
 
 .rating-picker input {

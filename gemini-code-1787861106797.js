@@ -66,16 +66,6 @@ document.querySelectorAll('nav a[href]').forEach(link => {
     if (link.getAttribute('href') === currentPage) link.classList.add('active');
 });
 
-document.querySelectorAll('a[href$=".html"]').forEach(link => {
-    link.addEventListener('click', function(event) {
-        const destination = link.getAttribute('href');
-        if (!destination || destination === currentPage || link.target === '_blank') return;
-        event.preventDefault();
-        document.body.classList.add('page-leaving');
-        window.setTimeout(() => { window.location.href = destination; }, 220);
-    });
-});
-
 const languageToggle = document.getElementById('language-toggle');
 if (languageToggle) languageToggle.addEventListener('click', function() {
     localStorage.setItem('aura-language', document.documentElement.lang === 'ar' ? 'en' : 'ar');

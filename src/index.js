@@ -5,7 +5,7 @@ export default {
 
 		if (response.status === 404 || url.pathname === "/") {
 			return await env.ASSETS.fetch(
-				new Request(new URL("/Main-v2.html", request.url), request),
+				new Request(new URL("/Main-v3.html", request.url), request),
 			);
 		}
 

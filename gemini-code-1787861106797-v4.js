@@ -27,6 +27,15 @@ const translations = {
     'صياغة استراتيجيات تطويرية مبتكرة تهدف للتوسع المالي والتجاري وزيادة الحصة السوقية.': 'Creating innovative development strategies to drive financial and commercial growth and increase market share.',
     'تقديم دراسات واستشارات متخصصة تساهم في رفع كفاءة العمليات وتخفيض التكاليف التشغيلية.': 'Providing specialized studies and consulting that improve operational efficiency and reduce operating costs.',
     'إدارة العمليات التجارية والفرص الاستثمارية القيمة في دولة الإمارات والأسواق العالمية.': 'Managing valuable commercial operations and investment opportunities in the UAE and global markets.'
+    , 'آراء العملاء': 'Client Reviews', 'تجارب تُلهم ثقة جديدة': 'Experiences That Inspire New Confidence',
+    'نحن بانتظار أولى تجاربكم معنا.': 'We are waiting to hear about your first experience with us.',
+    'شاركنا رأيك': 'Share Your Experience', 'رأيك يساعدنا على تقديم تجربة أفضل.': 'Your feedback helps us create a better experience.',
+    'الاسم': 'Name', 'اكتب اسمك': 'Enter your name', 'التقييم': 'Rating', 'اختر تقييمك': 'Choose your rating',
+    'رسالتك': 'Your message', 'كيف كانت تجربتك معنا؟': 'How was your experience with us?',
+    'إرسال التقييم': 'Submit Review', 'التقييمات ستظهر هنا قريبًا.': 'Reviews will appear here soon.',
+    'جارٍ إرسال تقييمك...': 'Submitting your review...',
+    'شكرًا لك. تم استلام تقييمك وسيظهر بعد المراجعة.': 'Thank you. Your review was received and will appear after approval.',
+    'حدث خطأ، حاول مرة أخرى.': 'Something went wrong. Please try again.'
 };
 
 const reverseTranslations = Object.fromEntries(Object.entries(translations).map(([arabic, english]) => [english, arabic]));
@@ -56,6 +65,44 @@ function translateText(language) {
         toggle.textContent = language === 'en' ? 'العربية' : 'English';
         toggle.setAttribute('aria-label', language === 'en' ? 'Switch to Arabic' : 'Switch to English');
     }
+    updateReviewLanguage(language);
+}
+
+const reviewCopy = {
+    ar: {
+        namePlaceholder: 'اكتب اسمك',
+        commentPlaceholder: 'كيف كانت تجربتك معنا؟',
+        ratingLabel: 'اختر تقييمك',
+        stars: ['نجمة واحدة', 'نجمتان', '3 نجوم', '4 نجوم', '5 نجوم'],
+        empty: 'التقييمات ستظهر هنا قريبًا.',
+        loading: 'جارٍ إرسال تقييمك...',
+        success: 'شكرًا لك. تم استلام تقييمك وسيظهر بعد المراجعة.',
+        error: 'حدث خطأ، حاول مرة أخرى.'
+    },
+    en: {
+        namePlaceholder: 'Enter your name',
+        commentPlaceholder: 'How was your experience with us?',
+        ratingLabel: 'Choose your rating',
+        stars: ['One star', 'Two stars', '3 stars', '4 stars', '5 stars'],
+        empty: 'Reviews will appear here soon.',
+        loading: 'Submitting your review...',
+        success: 'Thank you. Your review was received and will appear after approval.',
+        error: 'Something went wrong. Please try again.'
+    }
+};
+
+function updateReviewLanguage(language) {
+    const copy = reviewCopy[language];
+    const nameInput = document.getElementById('review-name');
+    const commentInput = document.getElementById('review-comment');
+    const ratingPicker = document.querySelector('.rating-picker');
+    if (nameInput) nameInput.placeholder = copy.namePlaceholder;
+    if (commentInput) commentInput.placeholder = copy.commentPlaceholder;
+    if (ratingPicker) ratingPicker.setAttribute('aria-label', copy.ratingLabel);
+    document.querySelectorAll('.rating-picker input').forEach(input => {
+        const label = document.querySelector(`label[for="${input.id}"]`);
+        if (label) label.setAttribute('aria-label', copy.stars[Number(input.value) - 1]);
+    });
 }
 
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
@@ -100,7 +147,8 @@ async function loadReviews() {
         const data = await response.json();
         renderReviews(data.reviews || []);
     } catch {
-        reviewsList.innerHTML = '<div class="reviews-empty">التقييمات ستظهر هنا قريبًا.</div>';
+        reviewsList.textContent = reviewCopy[document.documentElement.lang].empty;
+        reviewsList.className = 'reviews-list reviews-empty';
     }
 }
 
@@ -110,7 +158,7 @@ if (reviewForm) {
         const submitButton = reviewForm.querySelector('button[type="submit"]');
         const formData = new FormData(reviewForm);
         submitButton.disabled = true;
-        reviewStatus.textContent = 'جارٍ إرسال تقييمك...';
+        reviewStatus.textContent = reviewCopy[document.documentElement.lang].loading;
 
         try {
             const response = await fetch('/api/reviews', {
@@ -121,9 +169,9 @@ if (reviewForm) {
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'حدث خطأ، حاول مرة أخرى.');
             reviewForm.reset();
-            reviewStatus.textContent = 'شكرًا لك. تم استلام تقييمك وسيظهر بعد المراجعة.';
+            reviewStatus.textContent = reviewCopy[document.documentElement.lang].success;
         } catch (error) {
-            reviewStatus.textContent = error.message;
+            reviewStatus.textContent = error.message || reviewCopy[document.documentElement.lang].error;
         } finally {
             submitButton.disabled = false;
         }

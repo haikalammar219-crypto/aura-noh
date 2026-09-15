@@ -534,11 +534,11 @@ section {
     gap: 3px;
 }
 
-body[dir="rtl"] .rating-picker {
+html[dir="rtl"] .rating-picker {
     direction: rtl;
 }
 
-body[dir="ltr"] .rating-picker {
+html[dir="ltr"] .rating-picker {
     direction: ltr;
 }
 

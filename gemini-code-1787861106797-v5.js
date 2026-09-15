@@ -127,9 +127,10 @@ function renderReviews(reviews) {
         header.className = 'review-card-header';
         const name = document.createElement('h3');
         name.textContent = review.name;
+        const rating = Math.max(1, Math.min(5, Number.parseInt(review.rating, 10) || 1));
         const stars = document.createElement('span');
         stars.className = 'review-stars';
-        stars.textContent = `${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}`;
+        stars.textContent = `${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}`;
         header.append(name, stars);
 
         const comment = document.createElement('p');
@@ -157,6 +158,7 @@ if (reviewForm) {
         event.preventDefault();
         const submitButton = reviewForm.querySelector('button[type="submit"]');
         const formData = new FormData(reviewForm);
+        const rating = Number.parseInt(formData.get('rating'), 10);
         submitButton.disabled = true;
         reviewStatus.textContent = reviewCopy[document.documentElement.lang].loading;
 
@@ -164,7 +166,11 @@ if (reviewForm) {
             const response = await fetch('/api/reviews', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(Object.fromEntries(formData.entries()))
+                body: JSON.stringify({
+                    name: formData.get('name'),
+                    rating,
+                    comment: formData.get('comment')
+                })
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'حدث خطأ، حاول مرة أخرى.');

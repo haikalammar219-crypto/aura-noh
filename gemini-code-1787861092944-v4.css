@@ -529,7 +529,7 @@ section {
 }
 
 .rating-picker {
-    direction: ltr;
+    direction: rtl;
     display: inline-flex;
     gap: 3px;
 }

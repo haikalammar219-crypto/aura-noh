@@ -66,6 +66,71 @@ document.querySelectorAll('nav a[href]').forEach(link => {
     if (link.getAttribute('href') === currentPage) link.classList.add('active');
 });
 
+const reviewsList = document.getElementById('reviews-list');
+const reviewForm = document.getElementById('review-form');
+const reviewStatus = document.getElementById('review-status');
+
+function renderReviews(reviews) {
+    if (!reviewsList || !reviews.length) return;
+    reviewsList.replaceChildren(...reviews.map(review => {
+        const article = document.createElement('article');
+        article.className = 'review-card';
+
+        const header = document.createElement('div');
+        header.className = 'review-card-header';
+        const name = document.createElement('h3');
+        name.textContent = review.name;
+        const stars = document.createElement('span');
+        stars.className = 'review-stars';
+        stars.textContent = `${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}`;
+        header.append(name, stars);
+
+        const comment = document.createElement('p');
+        comment.textContent = review.comment;
+        article.append(header, comment);
+        return article;
+    }));
+}
+
+async function loadReviews() {
+    if (!reviewsList) return;
+    try {
+        const response = await fetch('/api/reviews');
+        if (!response.ok) throw new Error('Reviews unavailable');
+        const data = await response.json();
+        renderReviews(data.reviews || []);
+    } catch {
+        reviewsList.innerHTML = '<div class="reviews-empty">التقييمات ستظهر هنا قريبًا.</div>';
+    }
+}
+
+if (reviewForm) {
+    reviewForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        const submitButton = reviewForm.querySelector('button[type="submit"]');
+        const formData = new FormData(reviewForm);
+        submitButton.disabled = true;
+        reviewStatus.textContent = 'جارٍ إرسال تقييمك...';
+
+        try {
+            const response = await fetch('/api/reviews', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(formData.entries()))
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'حدث خطأ، حاول مرة أخرى.');
+            reviewForm.reset();
+            reviewStatus.textContent = 'شكرًا لك. تم استلام تقييمك وسيظهر بعد المراجعة.';
+        } catch (error) {
+            reviewStatus.textContent = error.message;
+        } finally {
+            submitButton.disabled = false;
+        }
+    });
+    loadReviews();
+}
+
 const languageToggle = document.getElementById('language-toggle');
 if (languageToggle) languageToggle.addEventListener('click', function() {
     localStorage.setItem('aura-language', document.documentElement.lang === 'ar' ? 'en' : 'ar');

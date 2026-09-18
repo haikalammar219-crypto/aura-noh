@@ -392,6 +392,51 @@ section {
     line-height: 1.6;
 }
 
+/* Keep the about heading alive while the cards flip once per hover. */
+#about .section-title p,
+#about .section-title h2 {
+    animation: about-heading-drift 4.5s ease-in-out infinite;
+    will-change: transform;
+}
+
+#about .section-title h2 {
+    animation-delay: 180ms;
+}
+
+#about .card {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+#about .card:hover,
+#about .card:focus-within {
+    animation: about-card-flip 820ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes about-heading-drift {
+    0%, 100% { transform: translateX(-4px) scale(1); }
+    50% { transform: translateX(4px) scale(1.035); }
+}
+
+@keyframes about-card-flip {
+    0% { transform: translateY(-5px) rotateY(0deg); }
+    45% { transform: translateY(-5px) rotateY(190deg); }
+    100% { transform: translateY(-5px) rotateY(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #about .section-title p,
+    #about .section-title h2 {
+        animation: none;
+    }
+
+    #about .card:hover,
+    #about .card:focus-within {
+        animation: none;
+        transform: translateY(-5px);
+    }
+}
+
 .contact-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

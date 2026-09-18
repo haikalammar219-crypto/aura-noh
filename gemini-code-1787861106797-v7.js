@@ -95,6 +95,57 @@ function setupBounceCards() {
     observer.observe(container);
 }
 
+function setupWarpText() {
+    document.querySelectorAll('.warp-text').forEach(element => {
+        if (element.dataset.warpReady === 'true') return;
+        const text = element.textContent.trim();
+        element.dataset.warpReady = 'true';
+        element.setAttribute('aria-label', text);
+        const textNodes = [];
+        const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        let characterIndex = 0;
+        textNodes.forEach(node => {
+            const fragment = document.createDocumentFragment();
+            Array.from(node.nodeValue).forEach(character => {
+                const span = document.createElement('span');
+                span.className = 'warp-letter';
+                span.textContent = character === ' ' ? '\u00a0' : character;
+                span.style.setProperty('--warp-index', characterIndex++);
+                fragment.appendChild(span);
+            });
+            node.replaceWith(fragment);
+        });
+
+        let frame = 0;
+        let pointerX = 0.5;
+        let pointerY = 0.5;
+        const update = () => {
+            frame = 0;
+            const rect = element.getBoundingClientRect();
+            const center = rect.left + rect.width * pointerX;
+            element.querySelectorAll('.warp-letter').forEach(letter => {
+                const distance = (letter.offsetLeft + letter.offsetWidth / 2 - center) / Math.max(rect.width, 1);
+                const influence = Math.max(0, 1 - Math.abs(distance) * 4);
+                letter.style.setProperty('--warp-y', `${-influence * (8 + pointerY * 8)}px`);
+                letter.style.setProperty('--warp-rotate', `${distance * influence * -12}deg`);
+                letter.style.setProperty('--warp-scale', `${1 + influence * 0.08}`);
+            });
+        };
+        element.addEventListener('pointermove', event => {
+            const rect = element.getBoundingClientRect();
+            pointerX = (event.clientX - rect.left) / Math.max(rect.width, 1);
+            pointerY = (event.clientY - rect.top) / Math.max(rect.height, 1);
+            if (!frame) frame = requestAnimationFrame(update);
+        });
+        element.addEventListener('pointerleave', () => {
+            pointerX = 0.5;
+            pointerY = 0.5;
+            if (!frame) frame = requestAnimationFrame(update);
+        });
+    });
+}
+
 setupCardFlips();
 setupScrollReveal();
 setupBounceCards();
@@ -227,6 +278,7 @@ function updateReviewLanguage(language) {
 
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
 translateText(savedLanguage);
+setupWarpText();
 
 const currentPage = window.location.pathname.split('/').pop() || 'Main-v6.html';
 document.querySelectorAll('nav a[href]').forEach(link => {

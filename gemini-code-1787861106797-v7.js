@@ -117,7 +117,7 @@ const translations = {
     'حلول إستراتيجية وتجارية متكاملة بأسلوب': 'Integrated strategic and commercial solutions in a',
     'عصري وفاخر': 'modern and luxurious style',
     'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'We are a leading company registered in the UAE, dedicated to helping businesses grow and expand according to the latest global standards.',
-    'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': 'To be the preferred partner for regional and international companies and institutions seeking excellence and innovation in the UAE and Middle East markets.',
+    'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط والعالم.': 'To be the preferred partner for regional and international companies and institutions seeking excellence and innovation in the UAE, the Middle East, and the world.',
     'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'To provide world-class services and solutions that help our partners achieve the highest levels of performance, sustainability, and profitability.',
     'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': 'Transparency, total quality, commitment to excellence, and building long-term relationships with our clients and partners.',
     'صياغة استراتيجيات تطويرية مبتكرة تهدف للتوسع المالي والتجاري وزيادة الحصة السوقية.': 'Creating innovative development strategies to drive financial and commercial growth and increase market share.',
@@ -126,7 +126,7 @@ const translations = {
     'شبكة أعمالنا': 'Our Business Network',
     'حضور تجاري يتجاوز الحدود': 'A Business Presence Beyond Borders',
     'شراكة': 'Partnership',
-    'عالمية': 'Global',
+    'عالمية المستوى': 'World-Class',
     'تجارة': 'Commerce',
     'لوجستيات': 'Logistics',
     'استيراد وتصدير': 'Import & Export'

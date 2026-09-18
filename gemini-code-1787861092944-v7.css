@@ -139,6 +139,30 @@ nav a:hover {
     color: var(--accent-gold);
 }
 
+.reviews-nav-link {
+    align-items: center;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    border-radius: 999px;
+    color: var(--accent-gold-light);
+    display: inline-flex;
+    font-size: 14px;
+    gap: 7px;
+    padding: 5px 11px;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.reviews-nav-link i {
+    color: var(--accent-gold);
+    font-size: 12px;
+}
+
+.reviews-nav-link:hover {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: var(--accent-gold);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
 nav a.active {
     color: var(--accent-gold);
     position: relative;

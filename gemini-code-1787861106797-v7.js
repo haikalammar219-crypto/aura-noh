@@ -107,10 +107,15 @@ function setupWarpText() {
         let characterIndex = 0;
         textNodes.forEach(node => {
             const fragment = document.createDocumentFragment();
-            Array.from(node.nodeValue).forEach(character => {
+            node.nodeValue.split(/(\s+)/).forEach(part => {
+                if (!part) return;
+                if (/\s+/.test(part)) {
+                    fragment.appendChild(document.createTextNode(part));
+                    return;
+                }
                 const span = document.createElement('span');
-                span.className = 'warp-letter';
-                span.textContent = character === ' ' ? '\u00a0' : character;
+                span.className = 'warp-word';
+                span.textContent = part;
                 span.style.setProperty('--warp-index', characterIndex++);
                 fragment.appendChild(span);
             });
@@ -124,12 +129,12 @@ function setupWarpText() {
             frame = 0;
             const rect = element.getBoundingClientRect();
             const center = rect.left + rect.width * pointerX;
-            element.querySelectorAll('.warp-letter').forEach(letter => {
-                const distance = (letter.offsetLeft + letter.offsetWidth / 2 - center) / Math.max(rect.width, 1);
+            element.querySelectorAll('.warp-word').forEach(word => {
+                const distance = (word.offsetLeft + word.offsetWidth / 2 - center) / Math.max(rect.width, 1);
                 const influence = Math.max(0, 1 - Math.abs(distance) * 4);
-                letter.style.setProperty('--warp-y', `${-influence * (8 + pointerY * 8)}px`);
-                letter.style.setProperty('--warp-rotate', `${distance * influence * -12}deg`);
-                letter.style.setProperty('--warp-scale', `${1 + influence * 0.08}`);
+                word.style.setProperty('--warp-y', `${-influence * (8 + pointerY * 8)}px`);
+                word.style.setProperty('--warp-rotate', `${distance * influence * -12}deg`);
+                word.style.setProperty('--warp-scale', `${1 + influence * 0.08}`);
             });
         };
         element.addEventListener('pointermove', event => {
@@ -139,9 +144,11 @@ function setupWarpText() {
             if (!frame) frame = requestAnimationFrame(update);
         });
         element.addEventListener('pointerleave', () => {
-            pointerX = 0.5;
-            pointerY = 0.5;
-            if (!frame) frame = requestAnimationFrame(update);
+            element.querySelectorAll('.warp-word').forEach(word => {
+                word.style.setProperty('--warp-y', '0px');
+                word.style.setProperty('--warp-rotate', '0deg');
+                word.style.setProperty('--warp-scale', '1');
+            });
         });
     });
 }

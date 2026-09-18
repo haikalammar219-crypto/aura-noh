@@ -22,6 +22,24 @@ export default {
 			));
 		}
 
+		const cleanPages = {
+			"/about": "/about.html",
+			"/services": "/services.html",
+			"/contact": "/contact.html",
+		};
+		if (cleanPages[url.pathname]) {
+			return withSecurityHeaders(await env.ASSETS.fetch(
+				new Request(new URL(cleanPages[url.pathname], request.url), request),
+			));
+		}
+
+		const legacyPage = {
+			"/about.html": "/about",
+			"/services.html": "/services",
+			"/contact.html": "/contact",
+		}[url.pathname];
+		if (legacyPage) return withSecurityHeaders(Response.redirect(new URL(legacyPage, request.url), 301));
+
 		if (url.pathname === "/api/reviews") {
 			if (!env.DB) {
 				return withSecurityHeaders(Response.json({ error: "Reviews database is not configured." }, { status: 503 }));

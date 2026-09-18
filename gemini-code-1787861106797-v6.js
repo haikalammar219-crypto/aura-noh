@@ -27,7 +27,7 @@ const translations = {
     'صياغة استراتيجيات تطويرية مبتكرة تهدف للتوسع المالي والتجاري وزيادة الحصة السوقية.': 'Creating innovative development strategies to drive financial and commercial growth and increase market share.',
     'تقديم دراسات واستشارات متخصصة تساهم في رفع كفاءة العمليات وتخفيض التكاليف التشغيلية.': 'Providing specialized studies and consulting that improve operational efficiency and reduce operating costs.',
     'إدارة العمليات التجارية والفرص الاستثمارية القيمة في دولة الإمارات والأسواق العالمية.': 'Managing valuable commercial operations and investment opportunities in the UAE and global markets.'
-    , 'آراء العملاء': 'Client Reviews', 'تجارب تُلهم ثقة جديدة': 'Experiences That Inspire New Confidence',
+    , 'آراء العملاء': 'Testimonials', 'تجارب تُلهم ثقة جديدة': 'Experiences That Inspire New Confidence',
     'نحن بانتظار أولى تجاربكم معنا.': 'We are waiting to hear about your first experience with us.',
     'شاركنا رأيك': 'Share Your Experience', 'رأيك يساعدنا على تقديم تجربة أفضل.': 'Your feedback helps us create a better experience.',
     'الاسم': 'Name', 'اكتب اسمك': 'Enter your name', 'التقييم': 'Rating', 'اختر تقييمك': 'Choose your rating',

@@ -19,15 +19,15 @@ function setupCardFlips() {
         back.append(logo);
         inner.append(front, back);
         card.append(inner);
-        const flip = () => {
-            inner.classList.remove('is-flipping');
-            void inner.offsetWidth;
-            inner.classList.add('is-flipping');
+        const playFlip = () => {
+            card.classList.remove('is-flipping');
+            void card.offsetWidth;
+            card.classList.add('is-flipping');
         };
-        card.addEventListener('mouseenter', flip);
-        card.addEventListener('focusin', flip);
-        inner.addEventListener('animationend', event => {
-            if (event.animationName === 'card-logo-flip') inner.classList.remove('is-flipping');
+        card.addEventListener('pointerenter', playFlip);
+        card.addEventListener('focusin', playFlip);
+        card.addEventListener('animationend', event => {
+            if (event.animationName === 'card-full-flip') card.classList.remove('is-flipping');
         });
     });
 }

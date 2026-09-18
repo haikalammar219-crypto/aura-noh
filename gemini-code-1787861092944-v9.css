@@ -13,66 +13,71 @@
 
 * {
     box-sizing: border-box;
-    .card-inner {
-        min-height: 150px;
-        position: relative;
-        transform-style: preserve-3d;
-    }
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
 
-    .card-face {
-        backface-visibility: hidden;
-        min-height: 150px;
-        width: 100%;
-    }
+body {
+    font-family: 'Tajawal', 'Montserrat', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    opacity: 0;
+    animation: page-enter 0.45s ease forwards;
+}
 
-    .card-front {
-        position: relative;
-        z-index: 1;
-    }
+body.page-leaving {
+    animation: page-leave 0.22s ease forwards;
+}
 
-    .card-back {
-        align-items: center;
-        background: radial-gradient(circle, rgba(212, 175, 55, 0.16), transparent 68%);
-        display: flex;
-        inset: 0;
-        justify-content: center;
-        position: absolute;
-        transform: rotateY(180deg);
-    }
+@keyframes page-enter {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-    .card-back img {
-        filter: drop-shadow(0 8px 18px rgba(212, 175, 55, 0.25));
-        max-height: 118px;
-        max-width: 170px;
-        object-fit: contain;
-    }
+@keyframes page-leave {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-6px); }
+}
 
-    .card-inner.is-flipping {
-        animation: card-logo-flip 1.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+@media (prefers-reduced-motion: reduce) {
+    body,
+    body.page-leaving {
+        animation: none;
+        opacity: 1;
     }
+}
 
-    .card-icon {
-        width: 60px;
-        height: 60px;
-        background: rgba(212, 175, 55, 0.1);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--accent-gold-light);
-        font-size: 22px;
-        margin-bottom: 20px;
-    }
+/* SVG Logo Styling */
+.aura-logo-svg {
+    width: 45px;
+    height: 45px;
+    filter: drop-shadow(0px 2px 5px rgba(212, 175, 55, 0.4));
+}
 
-    .card:nth-child(2) .card-icon {
-        background: rgba(120, 183, 216, 0.12);
-        color: var(--accent-blue);
-    }
+.aura-logo-image {
+    width: 142px;
+    height: 58px;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0px 2px 5px rgba(212, 175, 55, 0.28));
+}
 
-    .card:nth-child(3) .card-icon {
-        background: rgba(127, 199, 165, 0.12);
-        color: var(--accent-green);
-    }
+.aura-logo-hero {
+    width: 230px;
+    height: 145px;
+    object-fit: contain;
+    margin-bottom: 12px;
+    filter: drop-shadow(0px 5px 16px rgba(212, 175, 55, 0.38));
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
     background: rgba(10, 14, 23, 0.92);
@@ -360,6 +365,10 @@ section {
     transform-style: preserve-3d;
 }
 
+.card.is-flipping .card-inner {
+    animation: card-full-flip 1600ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
 .card-face {
     backface-visibility: hidden;
     min-height: 150px;
@@ -491,8 +500,8 @@ section {
     }
 }
 
-@keyframes card-logo-flip {
-    0% { transform: rotateY(0); }
+@keyframes card-full-flip {
+    0% { transform: rotateY(0deg); }
     50% { transform: rotateY(180deg); }
     100% { transform: rotateY(360deg); }
 }
@@ -503,7 +512,8 @@ section {
     .section-title h2,
     .contact-info h3,
     .contact-info > p,
-    .reveal-on-scroll {
+    .reveal-on-scroll,
+    .card.is-flipping .card-inner {
         animation: none;
         opacity: 1;
         transform: none;
@@ -620,7 +630,6 @@ section {
 .review-form-heading h3 {
     color: #fff;
     font-size: 22px;
-    transition: transform 1.8s cubic-bezier(0.23, 1, 0.32, 1);
     margin-bottom: 3px;
 }
 

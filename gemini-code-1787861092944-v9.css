@@ -359,14 +359,16 @@ section {
     border-color: var(--accent-gold);
 }
 
-.card.is-flipping {
-    animation: rotate-vert-center 1.05s ease-in-out both;
-}
-
 .card-inner {
     min-height: 150px;
     position: relative;
     transform-style: preserve-3d;
+    transition: transform 900ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card:hover .card-inner,
+.card:focus-within .card-inner {
+    transform: rotateY(180deg);
 }
 
 .card-face {
@@ -437,10 +439,8 @@ section {
 .section-title p,
 .section-title h1,
 .section-title h2,
-.card h3,
-.card p,
-.review-form-heading h3,
-.review-form-heading p {
+.contact-info h3,
+.contact-info > p {
     opacity: 0;
     transform: translateY(18px);
     will-change: letter-spacing, opacity;
@@ -453,8 +453,6 @@ section {
 .card {
     will-change: transform;
 }
-
-.card.is-flipping { will-change: transform; }
 
 @-webkit-keyframes tracking-in-contract {
     0% {
@@ -508,12 +506,9 @@ section {
     .section-title p,
     .section-title h1,
     .section-title h2,
-    .card h3,
-    .card p,
-    .review-form-heading h3,
-    .review-form-heading p,
-    .reveal-on-scroll,
-    .card.is-flipping {
+    .contact-info h3,
+    .contact-info > p,
+    .reveal-on-scroll {
         animation: none;
         opacity: 1;
         transform: none;

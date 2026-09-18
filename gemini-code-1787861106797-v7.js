@@ -19,20 +19,12 @@ function setupCardFlips() {
         back.append(logo);
         inner.append(front, back);
         card.append(inner);
-        card.addEventListener('mouseenter', () => {
-            card.classList.remove('is-flipping');
-            void card.offsetWidth;
-            card.classList.add('is-flipping');
-        });
-        card.addEventListener('animationend', event => {
-            if (event.animationName === 'rotate-vert-center') card.classList.remove('is-flipping');
-        });
     });
 }
 
 function setupScrollReveal() {
     const revealTargets = document.querySelectorAll(
-        '.section-title p, .section-title h1, .section-title h2, .card h3, .card p, .review-form-heading h3, .review-form-heading p'
+        '.section-title p:not(#reviews .section-title p), .section-title h1:not(#reviews .section-title h1), .section-title h2:not(#reviews .section-title h2), .contact-info h3, .contact-info > p'
     );
     revealTargets.forEach((element, index) => {
         element.classList.add('reveal-on-scroll');

@@ -169,7 +169,8 @@ if (reviewForm) {
                 body: JSON.stringify({
                     name: formData.get('name'),
                     rating,
-                    comment: formData.get('comment')
+                    comment: formData.get('comment'),
+                    website: formData.get('website')
                 })
             });
             const data = await response.json();

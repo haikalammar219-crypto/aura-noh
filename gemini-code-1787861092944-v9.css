@@ -530,6 +530,15 @@ section {
     margin: 14px 0 7px;
 }
 
+.review-trap {
+    height: 0;
+    margin: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+}
+
 .review-form input[type="text"],
 .review-form textarea {
     background: rgba(10, 14, 23, 0.72);

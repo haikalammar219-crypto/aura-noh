@@ -1,17 +1,34 @@
 export default {
 	async fetch(request, env) {
 		const url = new URL(request.url);
+		const origin = request.headers.get("Origin");
+		const responseHeaders = {
+			"X-Content-Type-Options": "nosniff",
+			"X-Frame-Options": "DENY",
+			"Referrer-Policy": "strict-origin-when-cross-origin",
+			"Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+			"Content-Security-Policy": "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+		};
+		const withSecurityHeaders = response => {
+			const headers = new Headers(response.headers);
+			Object.entries(responseHeaders).forEach(([key, value]) => headers.set(key, value));
+			if (url.protocol === "https:") headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+			return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+		};
 
 		if (url.pathname === "/") {
-			return await env.ASSETS.fetch(
+			return withSecurityHeaders(await env.ASSETS.fetch(
 				new Request(new URL("/Main-v6", request.url), request),
-			);
+			));
 		}
 
 		if (url.pathname === "/api/reviews") {
 			if (!env.DB) {
-				return Response.json({ error: "Reviews database is not configured." }, { status: 503 });
+				return withSecurityHeaders(Response.json({ error: "Reviews database is not configured." }, { status: 503 }));
 			}
+			if (request.method === "OPTIONS") return withSecurityHeaders(new Response(null, { status: 204 }));
+			if (request.method !== "GET" && request.method !== "POST") return withSecurityHeaders(new Response("Method Not Allowed", { status: 405 }));
+			if (request.method === "POST" && origin && origin !== url.origin) return withSecurityHeaders(Response.json({ error: "Invalid origin." }, { status: 403 }));
 
 			await env.DB.prepare(`
 				CREATE TABLE IF NOT EXISTS reviews (
@@ -32,10 +49,12 @@ export default {
 					ORDER BY created_at DESC
 					LIMIT 30
 				`).all();
-				return Response.json({ reviews: results });
+				return withSecurityHeaders(Response.json({ reviews: results }));
 			}
 
 			if (request.method === "POST") {
+				if (request.headers.get("Content-Type")?.split(";")[0] !== "application/json") return withSecurityHeaders(Response.json({ error: "JSON is required." }, { status: 415 }));
+				if (Number(request.headers.get("Content-Length") || 0) > 10000) return withSecurityHeaders(Response.json({ error: "Request is too large." }, { status: 413 }));
 				let payload;
 				try {
 					payload = await request.json();
@@ -46,27 +65,26 @@ export default {
 				const name = String(payload.name || "").trim().slice(0, 80);
 				const comment = String(payload.comment || "").trim().slice(0, 600);
 				const rating = Number(payload.rating);
+				if (String(payload.website || "").trim()) return withSecurityHeaders(Response.json({ message: "Review submitted for approval." }, { status: 201 }));
 				if (!name || !comment || !Number.isInteger(rating) || rating < 1 || rating > 5) {
-					return Response.json({ error: "Please complete all review fields." }, { status: 400 });
+					return withSecurityHeaders(Response.json({ error: "Please complete all review fields." }, { status: 400 }));
 				}
 
 				await env.DB.prepare(
 					"INSERT INTO reviews (name, rating, comment) VALUES (?, ?, ?)",
 				).bind(name, rating, comment).run();
-				return Response.json({ message: "Review submitted for approval." }, { status: 201 });
+				return withSecurityHeaders(Response.json({ message: "Review submitted for approval." }, { status: 201 }));
 			}
-
-			return new Response("Method Not Allowed", { status: 405 });
 		}
 
 		const response = await env.ASSETS.fetch(request);
 
 		if (response.status === 404 || url.pathname === "/") {
-			return await env.ASSETS.fetch(
+			return withSecurityHeaders(await env.ASSETS.fetch(
 				new Request(new URL("/Main-v6.html", request.url), request),
-			);
+			));
 		}
 
-		return response;
+		return withSecurityHeaders(response);
 	},
 };

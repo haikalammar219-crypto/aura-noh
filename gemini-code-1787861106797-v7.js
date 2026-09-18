@@ -19,6 +19,16 @@ function setupCardFlips() {
         back.append(logo);
         inner.append(front, back);
         card.append(inner);
+        const flip = () => {
+            inner.classList.remove('is-flipping');
+            void inner.offsetWidth;
+            inner.classList.add('is-flipping');
+        };
+        card.addEventListener('mouseenter', flip);
+        card.addEventListener('focusin', flip);
+        inner.addEventListener('animationend', event => {
+            if (event.animationName === 'card-logo-flip') inner.classList.remove('is-flipping');
+        });
     });
 }
 

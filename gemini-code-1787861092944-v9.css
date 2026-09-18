@@ -357,11 +357,28 @@ section {
     height: 230px;
     left: 50%;
     overflow: hidden;
+    opacity: 0;
     position: absolute;
+    scale: 0.35;
     top: 36px;
     transform-origin: 50% 100%;
     transition: transform 380ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 380ms ease, z-index 0s;
     width: 230px;
+}
+
+.bounce-cards-container.is-visible .bounce-card {
+    animation: bounce-card-in 780ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.bounce-cards-container.is-visible .bounce-card-0 { animation-delay: 0ms; }
+.bounce-cards-container.is-visible .bounce-card-1 { animation-delay: 90ms; }
+.bounce-cards-container.is-visible .bounce-card-2 { animation-delay: 180ms; }
+.bounce-cards-container.is-visible .bounce-card-3 { animation-delay: 270ms; }
+.bounce-cards-container.is-visible .bounce-card-4 { animation-delay: 360ms; }
+
+@keyframes bounce-card-in {
+    from { opacity: 0; scale: 0.35; }
+    to { opacity: 1; scale: 1; }
 }
 
 .bounce-card img {
@@ -610,6 +627,12 @@ section {
         animation: none;
         opacity: 1;
         transform: none;
+    }
+
+    .bounce-card {
+        animation: none !important;
+        opacity: 1;
+        scale: 1;
     }
 }
 

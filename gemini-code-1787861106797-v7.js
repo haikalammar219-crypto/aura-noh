@@ -256,6 +256,57 @@ function setRating(value, animate = true) {
 
 if (ratingPicker) {
     const stars = [...ratingPicker.querySelectorAll('.peek-rating__star')];
+    let draggingRating = false;
+    let suppressNextClick = false;
+
+    const ratingAtPoint = (clientX, clientY) => {
+        const target = document.elementFromPoint(clientX, clientY)?.closest('.peek-rating__star');
+        return target && ratingPicker.contains(target) ? Number(target.dataset.rating) : null;
+    };
+
+    const previewRating = value => {
+        if (!value) return;
+        paintRating(value, true);
+        const language = document.documentElement.lang === 'en' ? 'en' : 'ar';
+        ratingTip.textContent = ratingLabels[language][value - 1];
+        const star = ratingPicker.querySelector(`[data-rating="${value}"]`);
+        ratingTip.style.left = `${star.offsetLeft + star.offsetWidth / 2}px`;
+        ratingTip.dataset.show = 'true';
+    };
+
+    ratingPicker.addEventListener('pointerdown', event => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
+        const value = ratingAtPoint(event.clientX, event.clientY);
+        if (!value) return;
+        draggingRating = true;
+        suppressNextClick = true;
+        ratingPicker.setPointerCapture?.(event.pointerId);
+        event.preventDefault();
+        previewRating(value);
+    });
+
+    ratingPicker.addEventListener('pointermove', event => {
+        if (!draggingRating) return;
+        event.preventDefault();
+        previewRating(ratingAtPoint(event.clientX, event.clientY));
+    });
+
+    const finishDrag = event => {
+        if (!draggingRating) return;
+        const value = ratingAtPoint(event.clientX, event.clientY);
+        draggingRating = false;
+        ratingPicker.releasePointerCapture?.(event.pointerId);
+        if (value) setRating(value);
+        else paintRating(Number(ratingValue.value));
+        ratingTip.dataset.show = 'false';
+        window.setTimeout(() => {
+            suppressNextClick = false;
+        }, 0);
+    };
+
+    ratingPicker.addEventListener('pointerup', finishDrag);
+    ratingPicker.addEventListener('pointercancel', finishDrag);
+
     stars.forEach(star => {
         const value = Number(star.dataset.rating);
         star.addEventListener('pointerenter', () => {
@@ -265,12 +316,16 @@ if (ratingPicker) {
             ratingTip.dataset.show = 'true';
         });
         star.addEventListener('pointerleave', () => {
+            if (draggingRating) return;
             paintRating(Number(ratingValue.value));
             ratingTip.dataset.show = 'false';
         });
         star.addEventListener('focus', () => paintRating(value, true));
         star.addEventListener('blur', () => paintRating(Number(ratingValue.value)));
-        star.addEventListener('click', () => setRating(value === Number(ratingValue.value) ? 0 : value));
+        star.addEventListener('click', () => {
+            if (suppressNextClick) return;
+            setRating(value === Number(ratingValue.value) ? 0 : value);
+        });
         star.addEventListener('keydown', event => {
             if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
                 event.preventDefault();

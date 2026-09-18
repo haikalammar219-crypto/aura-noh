@@ -57,8 +57,41 @@ function setupScrollReveal() {
     revealTargets.forEach(element => observer.observe(element));
 }
 
+function setupBounceCards() {
+    const container = document.getElementById('bounce-cards');
+    if (!container) return;
+    const cards = [...container.querySelectorAll('.bounce-card')];
+    const baseTransforms = [
+        'translateX(-50%) rotate(7deg) translateX(-285px)',
+        'translateX(-50%) rotate(3deg) translateX(-145px)',
+        'translateX(-50%) rotate(-2deg)',
+        'translateX(-50%) rotate(-5deg) translateX(145px)',
+        'translateX(-50%) rotate(-8deg) translateX(285px)'
+    ];
+    cards.forEach((card, hoveredIndex) => {
+        card.addEventListener('mouseenter', () => {
+            cards.forEach((sibling, index) => {
+                sibling.classList.toggle('is-hovered', index === hoveredIndex);
+                if (index === hoveredIndex) {
+                    sibling.style.transform = 'translateX(-50%) rotate(0deg) translateY(-18px) scale(1.06)';
+                } else {
+                    const direction = index < hoveredIndex ? -1 : 1;
+                    sibling.style.transform = `${baseTransforms[index]} translateX(${direction * 26}px)`;
+                }
+            });
+        });
+        card.addEventListener('mouseleave', () => {
+            cards.forEach((sibling, index) => {
+                sibling.classList.remove('is-hovered');
+                sibling.style.transform = '';
+            });
+        });
+    });
+}
+
 setupCardFlips();
 setupScrollReveal();
+setupBounceCards();
 
 const translations = {
     'عن الشركة': 'About the Company', 'مجالات العمل': 'Fields of Work', 'التواصل': 'Contact',

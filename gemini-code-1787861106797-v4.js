@@ -27,7 +27,7 @@ const translations = {
     'صياغة استراتيجيات تطويرية مبتكرة تهدف للتوسع المالي والتجاري وزيادة الحصة السوقية.': 'Creating innovative development strategies to drive financial and commercial growth and increase market share.',
     'تقديم دراسات واستشارات متخصصة تساهم في رفع كفاءة العمليات وتخفيض التكاليف التشغيلية.': 'Providing specialized studies and consulting that improve operational efficiency and reduce operating costs.',
     'إدارة العمليات التجارية والفرص الاستثمارية القيمة في دولة الإمارات والأسواق العالمية.': 'Managing valuable commercial operations and investment opportunities in the UAE and global markets.'
-    , 'آراء العملاء': 'Testimonials', 'تجارب تُلهم ثقة جديدة': 'Experiences That Inspire New Confidence',
+    , 'آراء العملاء': 'Client Reviews', 'تجارب تُلهم ثقة جديدة': 'Experiences That Inspire New Confidence',
     'نحن بانتظار أولى تجاربكم معنا.': 'We are waiting to hear about your first experience with us.',
     'شاركنا رأيك': 'Share Your Experience', 'رأيك يساعدنا على تقديم تجربة أفضل.': 'Your feedback helps us create a better experience.',
     'الاسم': 'Name', 'اكتب اسمك': 'Enter your name', 'التقييم': 'Rating', 'اختر تقييمك': 'Choose your rating',
@@ -53,12 +53,12 @@ function translateText(language) {
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'en' ? 'ltr' : 'rtl';
     const pageTitles = {
-        'Main-v6.html': ['AURA ENTERPRISE FZE LLC | الموقع الرسمي', 'AURA ENTERPRISE FZE LLC | Official Website'],
+        'Main-v4.html': ['AURA ENTERPRISE FZE LLC | الموقع الرسمي', 'AURA ENTERPRISE FZE LLC | Official Website'],
         'about.html': ['عن الشركة | AURA ENTERPRISE FZE LLC', 'About the Company | AURA ENTERPRISE FZE LLC'],
         'services.html': ['مجالات العمل | AURA ENTERPRISE FZE LLC', 'Fields of Work | AURA ENTERPRISE FZE LLC'],
         'contact.html': ['التواصل | AURA ENTERPRISE FZE LLC', 'Contact | AURA ENTERPRISE FZE LLC']
     };
-    const currentPage = window.location.pathname.split('/').pop() || 'Main-v6.html';
+    const currentPage = window.location.pathname.split('/').pop() || 'Main-v4.html';
     if (pageTitles[currentPage]) document.title = pageTitles[currentPage][language === 'en' ? 1 : 0];
     const toggle = document.getElementById('language-toggle');
     if (toggle) {
@@ -95,19 +95,20 @@ function updateReviewLanguage(language) {
     const copy = reviewCopy[language];
     const nameInput = document.getElementById('review-name');
     const commentInput = document.getElementById('review-comment');
-    const ratingPicker = document.querySelector('.peek-rating');
+    const ratingPicker = document.querySelector('.rating-picker');
     if (nameInput) nameInput.placeholder = copy.namePlaceholder;
     if (commentInput) commentInput.placeholder = copy.commentPlaceholder;
     if (ratingPicker) ratingPicker.setAttribute('aria-label', copy.ratingLabel);
-    document.querySelectorAll('.peek-rating__star').forEach(star => {
-        star.setAttribute('aria-label', copy.stars[Number(star.dataset.rating) - 1]);
+    document.querySelectorAll('.rating-picker input').forEach(input => {
+        const label = document.querySelector(`label[for="${input.id}"]`);
+        if (label) label.setAttribute('aria-label', copy.stars[Number(input.value) - 1]);
     });
 }
 
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
 translateText(savedLanguage);
 
-const currentPage = window.location.pathname.split('/').pop() || 'Main-v6.html';
+const currentPage = window.location.pathname.split('/').pop() || 'Main-v4.html';
 document.querySelectorAll('nav a[href]').forEach(link => {
     if (link.getAttribute('href') === currentPage) link.classList.add('active');
 });
@@ -115,76 +116,6 @@ document.querySelectorAll('nav a[href]').forEach(link => {
 const reviewsList = document.getElementById('reviews-list');
 const reviewForm = document.getElementById('review-form');
 const reviewStatus = document.getElementById('review-status');
-const ratingPicker = document.getElementById('rating-picker');
-const ratingValue = document.getElementById('rating-value');
-const ratingTip = document.getElementById('rating-tip');
-const ratingLabels = { ar: ['ضعيف', 'مقبول', 'جيد', 'رائع', 'ممتاز'], en: ['Poor', 'Fair', 'Good', 'Great', 'Superb'] };
-
-function paintRating(value, preview = false) {
-    const stars = ratingPicker?.querySelectorAll('.peek-rating__star') || [];
-    stars.forEach(star => {
-        const starValue = Number(star.dataset.rating);
-        const glyph = star.querySelector('.peek-rating__glyph');
-        const lift = star.querySelector('.peek-rating__lift');
-        glyph.dataset.lit = String(starValue <= value);
-        lift.style.transform = preview && starValue <= value
-            ? `translateY(-8px) scale(${starValue === value ? 1.15 : 1})`
-            : 'translateY(0) scale(1)';
-        star.setAttribute('aria-checked', String(!preview && starValue === value));
-        star.tabIndex = !preview && starValue === value ? 0 : (!value && starValue === 1 ? 0 : -1);
-    });
-}
-
-function setRating(value, animate = true) {
-    const next = Math.max(0, Math.min(5, Number(value) || 0));
-    if (ratingValue) ratingValue.value = String(next);
-    paintRating(next);
-    if (ratingTip) {
-        const language = document.documentElement.lang === 'en' ? 'en' : 'ar';
-        ratingTip.textContent = next ? ratingLabels[language][next - 1] : '';
-        ratingTip.dataset.show = String(next > 0);
-    }
-    if (animate && next > 0) {
-        const glyph = ratingPicker?.querySelector(`[data-rating="${next}"] .peek-rating__glyph`);
-        glyph?.animate?.([
-            { transform: 'scale(1)' },
-            { transform: 'scale(1.35)', offset: 0.35 },
-            { transform: 'scale(1)' }
-        ], { duration: 300, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
-    }
-}
-
-if (ratingPicker) {
-    const stars = [...ratingPicker.querySelectorAll('.peek-rating__star')];
-    stars.forEach(star => {
-        const value = Number(star.dataset.rating);
-        star.addEventListener('pointerenter', () => {
-            paintRating(value, true);
-            ratingTip.textContent = ratingLabels[document.documentElement.lang === 'en' ? 'en' : 'ar'][value - 1];
-            ratingTip.style.left = `${star.offsetLeft + star.offsetWidth / 2}px`;
-            ratingTip.dataset.show = 'true';
-        });
-        star.addEventListener('pointerleave', () => {
-            paintRating(Number(ratingValue.value));
-            ratingTip.dataset.show = 'false';
-        });
-        star.addEventListener('focus', () => paintRating(value, true));
-        star.addEventListener('blur', () => paintRating(Number(ratingValue.value)));
-        star.addEventListener('click', () => setRating(value === Number(ratingValue.value) ? 0 : value));
-        star.addEventListener('keydown', event => {
-            if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
-                event.preventDefault();
-                stars[Math.min(stars.length - 1, value)].focus();
-            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
-                event.preventDefault();
-                stars[Math.max(0, value - 2)].focus();
-            } else if (event.key === 'Delete' || event.key === 'Backspace') {
-                setRating(0, false);
-            }
-        });
-    });
-    setRating(0, false);
-}
 
 function renderReviews(reviews) {
     if (!reviewsList || !reviews.length) return;
@@ -228,10 +159,6 @@ if (reviewForm) {
         const submitButton = reviewForm.querySelector('button[type="submit"]');
         const formData = new FormData(reviewForm);
         const rating = Number.parseInt(formData.get('rating'), 10);
-        if (!rating) {
-            reviewStatus.textContent = document.documentElement.lang === 'en' ? 'Please choose a rating.' : 'اختَر تقييمك أولًا.';
-            return;
-        }
         submitButton.disabled = true;
         reviewStatus.textContent = reviewCopy[document.documentElement.lang].loading;
 
@@ -242,14 +169,12 @@ if (reviewForm) {
                 body: JSON.stringify({
                     name: formData.get('name'),
                     rating,
-                    comment: formData.get('comment'),
-                    website: formData.get('website')
+                    comment: formData.get('comment')
                 })
             });
             const data = await response.json();
             if (!response.ok) throw new Error(data.error || 'حدث خطأ، حاول مرة أخرى.');
             reviewForm.reset();
-            setRating(0, false);
             reviewStatus.textContent = reviewCopy[document.documentElement.lang].success;
         } catch (error) {
             reviewStatus.textContent = error.message || reviewCopy[document.documentElement.lang].error;

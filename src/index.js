@@ -7,7 +7,7 @@ export default {
 			"X-Frame-Options": "DENY",
 			"Referrer-Policy": "strict-origin-when-cross-origin",
 			"Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-			"Content-Security-Policy": "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+			"Content-Security-Policy": "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
 		};
 		const withSecurityHeaders = response => {
 			const headers = new Headers(response.headers);
@@ -18,7 +18,7 @@ export default {
 
 		if (url.pathname === "/") {
 			return withSecurityHeaders(await env.ASSETS.fetch(
-				new Request(new URL("/Main-v6", request.url), request),
+				new Request(new URL("/Main-v6.html", request.url), request),
 			));
 		}
 
@@ -79,7 +79,8 @@ export default {
 
 		const response = await env.ASSETS.fetch(request);
 
-		if (response.status === 404 || url.pathname === "/") {
+		const lastPathSegment = url.pathname.split("/").pop() || "";
+		if (response.status === 404 && !lastPathSegment.includes(".")) {
 			return withSecurityHeaders(await env.ASSETS.fetch(
 				new Request(new URL("/Main-v6.html", request.url), request),
 			));

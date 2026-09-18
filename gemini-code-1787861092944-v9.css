@@ -348,12 +348,53 @@ section {
     border: 1px solid var(--border-color);
     padding: 35px 25px;
     border-radius: 16px;
-    transition: all 0.3s ease;
+    min-height: 220px;
+    perspective: 1000px;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
     border-color: var(--accent-gold);
+}
+
+.card.is-flipping {
+    animation: rotate-vert-center 1.05s ease-in-out both;
+}
+
+.card-inner {
+    min-height: 150px;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.card-face {
+    backface-visibility: hidden;
+    min-height: 150px;
+    width: 100%;
+}
+
+.card-front {
+    position: relative;
+    z-index: 1;
+}
+
+.card-back {
+    align-items: center;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.16), transparent 68%);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    position: absolute;
+    transform: rotateY(180deg);
+}
+
+.card-back img {
+    filter: drop-shadow(0 8px 18px rgba(212, 175, 55, 0.25));
+    max-height: 118px;
+    max-width: 170px;
+    object-fit: contain;
 }
 
 .card-icon {
@@ -393,8 +434,6 @@ section {
 }
 
 /* Shared Animista motion across every page. */
-.hero-content h1,
-.hero-content p,
 .section-title p,
 .section-title h1,
 .section-title h2,
@@ -402,26 +441,20 @@ section {
 .card p,
 .review-form-heading h3,
 .review-form-heading p {
-    animation: tracking-in-contract 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    opacity: 0;
+    transform: translateY(18px);
     will-change: letter-spacing, opacity;
 }
 
-.section-title h1,
-.section-title h2,
-.card h3,
-.review-form-heading h3 {
-    animation-delay: 120ms;
+.reveal-on-scroll.is-visible {
+    animation: tracking-in-contract 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .card {
-    transform-style: preserve-3d;
     will-change: transform;
 }
 
-.card:hover,
-.card:focus-within {
-    animation: rotate-vert-center 820ms ease-in-out both;
-}
+.card.is-flipping { will-change: transform; }
 
 @-webkit-keyframes tracking-in-contract {
     0% {
@@ -472,8 +505,6 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-content h1,
-    .hero-content p,
     .section-title p,
     .section-title h1,
     .section-title h2,
@@ -481,9 +512,11 @@ section {
     .card p,
     .review-form-heading h3,
     .review-form-heading p,
-    .card:hover,
-    .card:focus-within {
+    .reveal-on-scroll,
+    .card.is-flipping {
         animation: none;
+        opacity: 1;
+        transform: none;
     }
 }
 

@@ -3,6 +3,61 @@ window.addEventListener('scroll', function() {
     if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
+function setupCardFlips() {
+    document.querySelectorAll('.card').forEach(card => {
+        if (card.querySelector('.card-inner')) return;
+        const inner = document.createElement('div');
+        inner.className = 'card-inner';
+        const front = document.createElement('div');
+        front.className = 'card-face card-front';
+        const back = document.createElement('div');
+        back.className = 'card-face card-back';
+        const logo = document.createElement('img');
+        logo.src = 'aura-logo.png';
+        logo.alt = 'AURA ENTERPRISE logo';
+        front.replaceChildren(...Array.from(card.childNodes));
+        back.append(logo);
+        inner.append(front, back);
+        card.append(inner);
+        card.addEventListener('mouseenter', () => {
+            card.classList.remove('is-flipping');
+            void card.offsetWidth;
+            card.classList.add('is-flipping');
+        });
+        card.addEventListener('animationend', event => {
+            if (event.animationName === 'rotate-vert-center') card.classList.remove('is-flipping');
+        });
+    });
+}
+
+function setupScrollReveal() {
+    const revealTargets = document.querySelectorAll(
+        '.section-title p, .section-title h1, .section-title h2, .card h3, .card p, .review-form-heading h3, .review-form-heading p'
+    );
+    revealTargets.forEach((element, index) => {
+        element.classList.add('reveal-on-scroll');
+        element.style.animationDelay = `${Math.min(index % 3, 2) * 100}ms`;
+    });
+
+    if (!('IntersectionObserver' in window)) {
+        revealTargets.forEach(element => element.classList.add('is-visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    revealTargets.forEach(element => observer.observe(element));
+}
+
+setupCardFlips();
+setupScrollReveal();
+
 const translations = {
     'عن الشركة': 'About the Company', 'مجالات العمل': 'Fields of Work', 'التواصل': 'Contact',
     'تواصل معنا': 'Contact Us', 'استكشف خدماتنا': 'Explore Our Services', 'تعرّف علينا': 'About Us',

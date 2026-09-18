@@ -22,10 +22,6 @@ export default {
 			));
 		}
 
-		if (url.pathname === "/Main-v6" || url.pathname === "/Main-v6.html") {
-			return withSecurityHeaders(Response.redirect(new URL("/", request.url), 301));
-		}
-
 		if (url.pathname === "/api/reviews") {
 			if (!env.DB) {
 				return withSecurityHeaders(Response.json({ error: "Reviews database is not configured." }, { status: 503 }));

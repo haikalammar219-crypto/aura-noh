@@ -102,6 +102,7 @@ setupBounceCards();
 const translations = {
     'عن الشركة': 'About the Company', 'مجالات العمل': 'Fields of Work', 'التواصل': 'Contact',
     'تواصل معنا': 'Contact Us', 'استكشف خدماتنا': 'Explore Our Services', 'تعرّف علينا': 'About Us',
+    'آراء العملاء': 'Testimonials',
     'من نحن': 'About Us', 'مجالات التميز': 'Areas of Excellence', 'مباشرة التواصل': 'Get in Touch',
     'رؤيتنا': 'Our Vision', 'مهمتنا': 'Our Mission', 'قيمنا': 'Our Values',
         'خدماتنا الاستراتيجية': 'Our Strategic Services', 'التجارة والاستثمار والوساطة التجارية': 'Trade, Investment & Commercial Brokerage',
@@ -142,21 +143,33 @@ const reverseTranslations = Object.fromEntries(Object.entries(translations).map(
 
 function translateText(language) {
     const dictionary = language === 'en' ? translations : reverseTranslations;
+    const translateValue = value => dictionary[value] || value;
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     const textNodes = [];
     while (walker.nextNode()) textNodes.push(walker.currentNode);
     textNodes.forEach(node => {
         const value = node.nodeValue;
         const trimmed = value.trim();
-        if (dictionary[trimmed]) node.nodeValue = value.replace(trimmed, dictionary[trimmed]);
+        if (dictionary[trimmed]) node.nodeValue = value.replace(trimmed, translateValue(trimmed));
+    });
+    document.querySelectorAll('[placeholder], [aria-label], [title], img[alt]').forEach(element => {
+        ['placeholder', 'aria-label', 'title', 'alt'].forEach(attribute => {
+            if (element.hasAttribute(attribute)) {
+                const value = element.getAttribute(attribute);
+                element.setAttribute(attribute, translateValue(value));
+            }
+        });
     });
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'en' ? 'ltr' : 'rtl';
     const pageTitles = {
         'Main-v6.html': ['AURA ENTERPRISE FZE LLC | الموقع الرسمي', 'AURA ENTERPRISE FZE LLC | Official Website'],
         'about.html': ['عن الشركة | AURA ENTERPRISE FZE LLC', 'About the Company | AURA ENTERPRISE FZE LLC'],
+        'about': ['عن الشركة | AURA ENTERPRISE FZE LLC', 'About the Company | AURA ENTERPRISE FZE LLC'],
         'services.html': ['مجالات العمل | AURA ENTERPRISE FZE LLC', 'Fields of Work | AURA ENTERPRISE FZE LLC'],
-        'contact.html': ['التواصل | AURA ENTERPRISE FZE LLC', 'Contact | AURA ENTERPRISE FZE LLC']
+        'services': ['مجالات العمل | AURA ENTERPRISE FZE LLC', 'Fields of Work | AURA ENTERPRISE FZE LLC'],
+        'contact.html': ['التواصل | AURA ENTERPRISE FZE LLC', 'Contact | AURA ENTERPRISE FZE LLC'],
+        'contact': ['التواصل | AURA ENTERPRISE FZE LLC', 'Contact | AURA ENTERPRISE FZE LLC']
     };
     const currentPage = window.location.pathname.split('/').pop() || 'Main-v6.html';
     if (pageTitles[currentPage]) document.title = pageTitles[currentPage][language === 'en' ? 1 : 0];

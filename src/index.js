@@ -2,6 +2,12 @@ export default {
 	async fetch(request, env) {
 		const url = new URL(request.url);
 
+		if (url.pathname === "/") {
+			return await env.ASSETS.fetch(
+				new Request(new URL("/Main-v6.html", request.url), request),
+			);
+		}
+
 		if (url.pathname === "/api/reviews") {
 			if (!env.DB) {
 				return Response.json({ error: "Reviews database is not configured." }, { status: 503 });

@@ -416,11 +416,11 @@ section {
 .bounce-card-label strong { color: #f5d36a; font-size: 19px; }
 .bounce-card-label span { font-size: 12px; letter-spacing: 0.08em; margin-top: 3px; opacity: 0.9; }
 
-.bounce-card-0 { transform: translateX(-50%) rotate(7deg) translateX(-285px); z-index: 1; }
-.bounce-card-1 { transform: translateX(-50%) rotate(3deg) translateX(-145px); z-index: 2; }
-.bounce-card-2 { transform: translateX(-50%) rotate(-2deg); z-index: 3; }
-.bounce-card-3 { transform: translateX(-50%) rotate(-5deg) translateX(145px); z-index: 2; }
-.bounce-card-4 { transform: translateX(-50%) rotate(-8deg) translateX(285px); z-index: 1; }
+.bounce-card-0 { --bounce-base: translateX(-50%) rotate(7deg) translateX(-285px); transform: var(--bounce-base); z-index: 1; }
+.bounce-card-1 { --bounce-base: translateX(-50%) rotate(3deg) translateX(-145px); transform: var(--bounce-base); z-index: 2; }
+.bounce-card-2 { --bounce-base: translateX(-50%) rotate(-2deg); transform: var(--bounce-base); z-index: 3; }
+.bounce-card-3 { --bounce-base: translateX(-50%) rotate(-5deg) translateX(145px); transform: var(--bounce-base); z-index: 2; }
+.bounce-card-4 { --bounce-base: translateX(-50%) rotate(-8deg) translateX(285px); transform: var(--bounce-base); z-index: 1; }
 
 .bounce-card.is-hovered {
     box-shadow: 0 18px 42px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 180, 0, 0.3);
@@ -430,11 +430,11 @@ section {
 @media (max-width: 760px) {
     .bounce-cards-container { height: 500px; max-width: 360px; }
     .bounce-card { height: 190px; top: 142px; width: 190px; }
-    .bounce-card-0 { transform: translateX(-50%) rotate(7deg) translate(-72px, -112px) scale(0.82); }
-    .bounce-card-1 { transform: translateX(-50%) rotate(3deg) translate(-48px, -55px) scale(0.88); }
-    .bounce-card-2 { transform: translateX(-50%) rotate(-2deg) translate(0, 0); }
-    .bounce-card-3 { transform: translateX(-50%) rotate(-5deg) translate(48px, 55px) scale(0.88); }
-    .bounce-card-4 { transform: translateX(-50%) rotate(-8deg) translate(72px, 112px) scale(0.82); }
+    .bounce-card-0 { --bounce-base: translateX(-50%) rotate(7deg) translate(-72px, -112px) scale(0.82); }
+    .bounce-card-1 { --bounce-base: translateX(-50%) rotate(3deg) translate(-48px, -55px) scale(0.88); }
+    .bounce-card-2 { --bounce-base: translateX(-50%) rotate(-2deg) translate(0, 0); }
+    .bounce-card-3 { --bounce-base: translateX(-50%) rotate(-5deg) translate(48px, 55px) scale(0.88); }
+    .bounce-card-4 { --bounce-base: translateX(-50%) rotate(-8deg) translate(72px, 112px) scale(0.82); }
 }
 
 .grid-3 {

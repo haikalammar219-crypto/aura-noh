@@ -138,6 +138,7 @@ function setupWarpText() {
             });
         };
         element.addEventListener('pointermove', event => {
+            if (event.pointerType === 'touch') return;
             const rect = element.getBoundingClientRect();
             pointerX = (event.clientX - rect.left) / Math.max(rect.width, 1);
             pointerY = (event.clientY - rect.top) / Math.max(rect.height, 1);

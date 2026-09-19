@@ -51,6 +51,13 @@ body.page-leaving {
     }
 }
 
+@media (pointer: coarse) {
+    .warp-word {
+        transform: none !important;
+        transition: none;
+    }
+}
+
 /* SVG Logo Styling */
 .aura-logo-svg {
     width: 45px;

@@ -306,6 +306,7 @@ function paintRating(value, preview = false) {
         const starValue = Number(star.dataset.rating);
         const glyph = star.querySelector('.peek-rating__glyph');
         const lift = star.querySelector('.peek-rating__lift');
+        glyph.getAnimations?.().forEach(animation => animation.cancel());
         glyph.dataset.lit = String(starValue <= value);
         lift.style.transform = preview && starValue <= value
             ? `translateY(-8px) scale(${starValue === value ? 1.15 : 1})`
@@ -323,14 +324,6 @@ function setRating(value, animate = true) {
         const language = document.documentElement.lang === 'en' ? 'en' : 'ar';
         ratingTip.textContent = next ? ratingLabels[language][next - 1] : '';
         ratingTip.dataset.show = String(next > 0);
-    }
-    if (animate && next > 0) {
-        const glyph = ratingPicker?.querySelector(`[data-rating="${next}"] .peek-rating__glyph`);
-        glyph?.animate?.([
-            { transform: 'scale(1)' },
-            { transform: 'scale(1.35)', offset: 0.35 },
-            { transform: 'scale(1)' }
-        ], { duration: 300, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
     }
 }
 

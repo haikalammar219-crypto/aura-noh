@@ -939,7 +939,9 @@ html[dir="ltr"] .rating-picker {
     color: var(--pr-idle);
     display: block;
     font-size: var(--pr-size);
+    font-family: Arial, sans-serif;
     line-height: 1;
+    transform: none;
     transition: color 160ms ease;
 }
 

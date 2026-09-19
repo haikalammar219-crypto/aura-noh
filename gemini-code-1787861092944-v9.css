@@ -224,6 +224,7 @@ nav a.active::after {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     text-align: center;
     padding: 140px 8% 80px;
     background: radial-gradient(circle at center, #182238 0%, #0a0e17 70%);
@@ -1062,18 +1063,154 @@ footer {
 }
 
 @media (max-width: 768px) {
-    header { padding: 15px 5%; }
+    header {
+        gap: 10px;
+        padding: 12px 5%;
+    }
+
+    .aura-logo-image {
+        height: 48px;
+        width: 112px;
+    }
+
+    .language-toggle {
+        flex: 0 0 auto;
+        font-size: 12px;
+        padding: 7px 10px;
+    }
+
     nav ul { display: none; }
-    .hero h1 { font-size: 34px; }
-    .hero p { font-size: 15px; }
+
+    .hero {
+        min-height: auto;
+        padding: 125px 5% 70px;
+    }
+
+    .aura-logo-hero {
+        height: 112px;
+        margin-bottom: 8px;
+        width: 175px;
+    }
+
+    .badge {
+        font-size: 12px;
+        margin-bottom: 20px;
+        padding: 6px 13px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+        line-height: 1.28;
+        margin-bottom: 16px;
+    }
+
+    .hero p {
+        font-size: 15px;
+        line-height: 1.75;
+        margin-bottom: 26px;
+    }
+
+    .hero-btns {
+        align-items: stretch;
+        flex-direction: column;
+        margin: 0 auto;
+        max-width: 280px;
+    }
+
+    .hero-btns a {
+        text-align: center;
+        width: 100%;
+    }
+
     .section-title h1,
-    .section-title h2 { font-size: 30px; }
+    .section-title h2 {
+        font-size: 30px;
+        line-height: 1.35;
+    }
+
+    .section-title { margin-bottom: 36px; }
     .contact-info h3 { font-size: 22px; }
     section { padding: 60px 5%; }
-    .contact-container { padding: 30px 20px; }
+    .grid-3 { gap: 20px; }
+
+    .card {
+        min-height: 205px;
+        padding: 28px 20px;
+    }
+
+    .card h3 {
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+    .card p { font-size: 15px; }
+    .contact-container {
+        gap: 28px;
+        grid-template-columns: minmax(0, 1fr);
+        min-width: 0;
+        padding: 30px 20px;
+    }
+
+    .contact-info,
+    .info-item,
+    .info-text,
+    .info-text strong,
+    .contact-link {
+        min-width: 0;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
     .reviews-layout { grid-template-columns: 1fr; }
     .review-card,
     .review-form { padding: 22px 18px; }
+    .review-form-heading h3 { font-size: 20px; }
+    .peek-rating { max-width: 100%; }
+    .peek-rating__row { gap: 2px; }
+    .peek-rating__star { min-width: 44px; }
     .contact-border-right { border-right: none; padding-right: 0; }
     body[dir="ltr"] .contact-border-right { border-left: none; padding-left: 0; }
+}
+
+@media (max-width: 390px) {
+    body { font-size: 15px; }
+    header { padding-left: 4%; padding-right: 4%; }
+
+    .aura-logo-image {
+        height: 44px;
+        width: 100px;
+    }
+
+    .language-toggle {
+        font-size: 11px;
+        padding: 6px 8px;
+    }
+
+    .hero { padding-top: 112px; }
+    .aura-logo-hero { height: 98px; width: 150px; }
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 14px; }
+    .section-title h1,
+    .section-title h2 { font-size: 26px; }
+    .section-title p { font-size: 14px; }
+
+    .bounce-cards-container {
+        height: 455px;
+        margin-left: -2%;
+        margin-right: -2%;
+    }
+
+    .bounce-card {
+        height: 172px;
+        width: 172px;
+    }
+
+    .bounce-card-label strong { font-size: 16px; }
+    .bounce-card-label span { font-size: 10px; }
+
+    .contact-container { padding: 24px 16px; }
+    .info-item { align-items: flex-start; gap: 12px; }
+    .info-text strong { font-size: 14px; overflow-wrap: anywhere; }
+    .review-form input[type="text"],
+    .review-form textarea { font-size: 16px; }
 }

@@ -70,8 +70,84 @@ body.page-leaving {
     width: 230px;
     height: 145px;
     object-fit: contain;
-    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
     filter: drop-shadow(0px 5px 16px rgba(212, 175, 55, 0.38));
+}
+
+.magic-rings-logo {
+    align-items: center;
+    display: flex;
+    height: 190px;
+    justify-content: center;
+    margin: 0 auto 12px;
+    position: relative;
+    width: 290px;
+}
+
+.magic-rings-logo::before {
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    border-radius: 50%;
+    box-shadow: 0 0 26px rgba(212, 175, 55, 0.14), inset 0 0 20px rgba(120, 183, 216, 0.08);
+    content: '';
+    height: 162px;
+    position: absolute;
+    width: 250px;
+}
+
+.magic-rings-logo::after {
+    border: 1px solid rgba(120, 183, 216, 0.22);
+    border-radius: 50%;
+    content: '';
+    height: 124px;
+    position: absolute;
+    width: 210px;
+}
+
+.magic-ring {
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    content: '';
+    opacity: 0;
+    position: absolute;
+    transform: scale(0.55);
+}
+
+.magic-ring-one {
+    color: var(--accent-gold);
+    height: 135px;
+    width: 225px;
+    animation: magic-ring-pulse 4.8s ease-out infinite;
+}
+
+.magic-ring-two {
+    color: var(--accent-blue);
+    height: 175px;
+    width: 270px;
+    animation: magic-ring-pulse 4.8s 1.6s ease-out infinite;
+}
+
+.magic-ring-three {
+    color: var(--accent-gold-light);
+    height: 215px;
+    width: 315px;
+    animation: magic-ring-pulse 4.8s 3.2s ease-out infinite;
+}
+
+.magic-rings-logo:hover .aura-logo-hero {
+    transform: scale(1.04);
+}
+
+@keyframes magic-ring-pulse {
+    0% { opacity: 0; transform: scale(0.55); }
+    18% { opacity: 0.7; }
+    72% { opacity: 0.2; }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .magic-ring { animation: none; opacity: 0.35; transform: scale(0.85); }
+    .magic-rings-logo:hover .aura-logo-hero { transform: none; }
 }
 
 /* Header */
@@ -1094,6 +1170,15 @@ footer {
         width: 175px;
     }
 
+    .magic-rings-logo {
+        height: 155px;
+        width: 250px;
+    }
+
+    .magic-ring-one { height: 112px; width: 185px; }
+    .magic-ring-two { height: 142px; width: 220px; }
+    .magic-ring-three { height: 175px; width: 255px; }
+
     .badge {
         font-size: 12px;
         margin-bottom: 20px;
@@ -1190,6 +1275,10 @@ footer {
 
     .hero { padding-top: 112px; }
     .aura-logo-hero { height: 98px; width: 150px; }
+    .magic-rings-logo { height: 135px; width: 220px; }
+    .magic-ring-one { height: 98px; width: 162px; }
+    .magic-ring-two { height: 122px; width: 194px; }
+    .magic-ring-three { height: 148px; width: 220px; }
     .hero h1 { font-size: 28px; }
     .hero p { font-size: 14px; }
     .section-title h1,

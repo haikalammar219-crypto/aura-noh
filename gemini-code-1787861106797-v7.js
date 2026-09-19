@@ -170,6 +170,7 @@ const translations = {
         'خدماتنا الاستراتيجية': 'Our Strategic Services', 'التجارة والاستثمار والوساطة التجارية': 'Trade, Investment & Commercial Brokerage',
         'الاستيراد والتصدير والتجارة العامة': 'Import, Export & General Trading', 'التسويق الإلكتروني': 'Digital Marketing Agency',
     'تواصل مع فريقنا': 'Contact Our Team', 'معلومات الاتصال الرسمية': 'Official Contact Information',
+    'تعرّف على AURA ENTERPRISE FZE LLC ورؤيتها ومهمتها وقيمها في تقديم حلول الأعمال والتجارة والاستشارات.': 'Learn about AURA ENTERPRISE FZE LLC, its vision, mission, and values in delivering business, trading, and consulting solutions.',
     'يسعدنا الإجابة على جميع استفساراتكم وبناء شراكات جديدة.': 'We are pleased to answer your questions and build new partnerships.',
     'البريد الإلكتروني': 'Email', 'رقم الهاتف (الإمارات)': 'Phone Number (UAE)',
     'المقر الرئيسي': 'Headquarters',
@@ -181,6 +182,7 @@ const translations = {
     'عصري وفاخر': 'modern and luxurious style',
     'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'We are a leading company registered in the UAE, dedicated to helping businesses grow and expand according to the latest global standards.',
     'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط والعالم.': 'To be the preferred partner for regional and international companies and institutions seeking excellence and innovation in the UAE, the Middle East, and the world.',
+    'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': 'To be the preferred partner for regional and international companies and institutions seeking excellence and innovation in the UAE and Middle East markets.',
     'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'To provide world-class services and solutions that help our partners achieve the highest levels of performance, sustainability, and profitability.',
     'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': 'Transparency, total quality, commitment to excellence, and building long-term relationships with our clients and partners.',
     'شبكة أعمالنا': 'Our Business Network',
@@ -218,8 +220,8 @@ function translateText(language) {
         const trimmed = value.trim();
         if (dictionary[trimmed]) node.nodeValue = value.replace(trimmed, translateValue(trimmed));
     });
-    document.querySelectorAll('[placeholder], [aria-label], [title], img[alt]').forEach(element => {
-        ['placeholder', 'aria-label', 'title', 'alt'].forEach(attribute => {
+    document.querySelectorAll('[placeholder], [aria-label], [title], img[alt], meta[name="description"]').forEach(element => {
+        ['placeholder', 'aria-label', 'title', 'alt', 'content'].forEach(attribute => {
             if (element.hasAttribute(attribute)) {
                 const value = element.getAttribute(attribute);
                 element.setAttribute(attribute, translateValue(value));

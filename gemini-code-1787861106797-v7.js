@@ -441,6 +441,20 @@ function setupLanguageMenu() {
 
 }
 
+function removeGoogleTranslationArtifacts() {
+    const cookies = ['googtrans', 'googtransopt'];
+    cookies.forEach(name => {
+        document.cookie = `${name}=; Max-Age=0; path=/`;
+        document.cookie = `${name}=; Max-Age=0; path=/; domain=${location.hostname}`;
+        document.cookie = `${name}=; Max-Age=0; path=/; domain=.${location.hostname}`;
+    });
+    document.querySelectorAll('iframe, [id^="goog-gt-"], [class*="goog-te"], [class*="VIpgJd"]').forEach(element => {
+        if (element.id === 'google_translate_element') return;
+        element.remove();
+    });
+}
+
+removeGoogleTranslationArtifacts();
 setupLanguageMenu();
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
 translateText(savedLanguage);

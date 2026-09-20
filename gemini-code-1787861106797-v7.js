@@ -249,8 +249,25 @@ function translateText(language) {
         'contact.html': ['التواصل | AURA ENTERPRISE FZE LLC', 'Contact | AURA ENTERPRISE FZE LLC'],
         'contact': ['التواصل | AURA ENTERPRISE FZE LLC', 'Contact | AURA ENTERPRISE FZE LLC']
     };
+    const localizedPageNames = {
+        ar: ['الموقع الرسمي', 'عن الشركة', 'مجالات العمل', 'التواصل'],
+        en: ['Official Website', 'About the Company', 'Fields of Work', 'Contact'],
+        es: ['Sitio web oficial', 'Acerca de la empresa', 'Áreas de trabajo', 'Contacto'],
+        fr: ['Site officiel', 'À propos de la société', 'Domaines d’activité', 'Contact'],
+        de: ['Offizielle Website', 'Über das Unternehmen', 'Tätigkeitsbereiche', 'Kontakt'],
+        'zh-CN': ['官方网站', '关于公司', '业务领域', '联系我们'],
+        ur: ['سرکاری ویب سائٹ', 'کمپنی کا تعارف', 'کام کے شعبے', 'رابطہ'],
+        fa: ['وب‌سایت رسمی', 'درباره شرکت', 'حوزه‌های فعالیت', 'تماس'],
+        tr: ['Resmi web sitesi', 'Şirket hakkında', 'Çalışma alanları', 'İletişim'],
+        pt: ['Site oficial', 'Sobre a empresa', 'Áreas de atuação', 'Contato'],
+        hi: ['आधिकारिक वेबसाइट', 'कंपनी के बारे में', 'कार्य क्षेत्र', 'संपर्क']
+    };
     const currentPage = window.location.pathname.split('/').pop() || 'Main-v6.html';
-    if (pageTitles[currentPage]) document.title = pageTitles[currentPage][language === 'en' ? 1 : 0];
+    if (pageTitles[currentPage]) {
+        const pageIndex = currentPage.startsWith('about') || currentPage === 'about' ? 1 : currentPage.startsWith('services') || currentPage === 'services' ? 2 : currentPage.startsWith('contact') || currentPage === 'contact' ? 3 : 0;
+        const pageName = localizedPageNames[language]?.[pageIndex] || localizedPageNames.en[pageIndex];
+        document.title = `AURA ENTERPRISE FZE LLC | ${pageName}`;
+    }
     const toggle = document.getElementById('language-toggle');
     if (toggle) {
         const label = languageOptions?.find(([code]) => code === language)?.[1] || (language === 'ar' ? 'العربية' : 'English');

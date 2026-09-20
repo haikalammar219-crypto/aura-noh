@@ -426,6 +426,45 @@ const sharedLocalCopy = {
 
 Object.entries(sharedLocalCopy).forEach(([language, values]) => Object.assign(localLanguagePacks[language] || (localLanguagePacks[language] = {}), values));
 
+Object.assign(localLanguagePacks.tr, {
+    'حلول إستراتيجية وتجارية متكاملة بأسلوب': 'Modern ve lüks bir tarzda',
+    'عصري وفاخر': 'entegre stratejik ve ticari çözümler',
+    'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'Birleşik Arap Emirlikleri’nde kayıtlı lider bir şirket olarak işletmelerin en yeni küresel standartlara göre büyümesine ve genişlemesine yardımcı oluyoruz.',
+    'استكشف خدماتنا': 'Hizmetlerimizi keşfedin',
+    'تعرّف علينا': 'Bizi tanıyın',
+    'من نحن': 'Biz kimiz',
+    'رؤيتنا': 'Vizyonumuz',
+    'مهمتنا': 'Misyonumuz',
+    'قيمنا': 'Değerlerimiz',
+    'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': 'BAE ve Orta Doğu pazarlarında mükemmellik ve yenilik arayan bölgesel ve uluslararası kurumların tercih ettiği ortak olmak.',
+    'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'Ortaklarımızın en yüksek performans, sürdürülebilirlik ve kârlılık seviyelerine ulaşmasını sağlayan dünya standartlarında hizmetler sunmak.',
+    'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': 'Şeffaflık, toplam kalite, mükemmellik taahhüdü ve müşterilerimizle uzun vadeli ilişkiler kurmak.',
+    'مجالات التميز': 'Uzmanlık alanlarımız',
+    'خدماتنا الاستراتيجية': 'Stratejik hizmetlerimiz',
+    'التجارة والاستثمار والوساطة التجارية': 'Ticaret, yatırım ve ticari aracılık',
+    'الاستيراد والتصدير والتجارة العامة': 'İthalat, ihracat ve genel ticaret',
+    'التسويق الإلكتروني': 'Dijital pazarlama ajansı',
+    'ربط الشركات بالفرص والشركاء المناسبين، وتسهيل الصفقات التجارية والاستثمارية الموثوقة.': 'Şirketleri doğru fırsat ve ortaklarla buluşturmak, güvenilir ticari ve yatırım anlaşmalarını kolaylaştırmak.',
+    'إدارة عمليات الاستيراد والتصدير والتجارة العامة عبر أسواق الإمارات والأسواق العالمية.': 'BAE ve küresel pazarlarda ithalat, ihracat ve genel ticaret operasyonlarını yönetmek.',
+    'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': 'Bireyler ve şirketler için daha güçlü bir çevrim içi varlık ve doğru müşterilere erişim sağlayan dijital pazarlama çözümleri.',
+    'تواصل مع فريقنا': 'Ekibimizle iletişime geçin',
+    'معلومات الاتصال الرسمية': 'Resmi iletişim bilgileri',
+    'يسعدنا الإجابة على جميع استفساراتكم وبناء شراكات جديدة.': 'Sorularınızı yanıtlamaktan ve yeni ortaklıklar kurmaktan memnuniyet duyarız.',
+    'البريد الإلكتروني': 'E-posta',
+    'رقم الهاتف (الإمارات)': 'Telefon numarası (BAE)',
+    'المقر الرئيسي': 'Merkez ofis',
+    'سجل الشركة': 'Şirket kaydı',
+    'معلومات الترخيص الرسمي للشركة:': 'Resmi şirket lisans bilgileri:',
+    'الاسم المسجل': 'Kayıtlı ad',
+    'الحالة القانونية': 'Yasal durum',
+    'آراء العملاء': 'Müşteri yorumları',
+    'تجارب تُلهم ثقة جديدة': 'Yeni bir güvene ilham veren deneyimler',
+    'نحن بانتظار أولى تجاربكم معنا.': 'İlk deneyiminizi bizimle paylaşmanızı bekliyoruz.',
+    'شاركنا رأيك': 'Deneyiminizi paylaşın',
+    'رأيك يساعدنا على تقديم تجربة أفضل.': 'Geri bildiriminiz daha iyi bir deneyim sunmamıza yardımcı olur.',
+    'جميع الحقوق محفوظة.': 'Tüm hakları saklıdır.'
+});
+
 function setupLanguageMenu() {
     const menu = document.getElementById('language-menu');
     const toggle = document.getElementById('language-toggle');

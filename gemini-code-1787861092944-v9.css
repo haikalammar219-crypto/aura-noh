@@ -701,6 +701,22 @@ section {
     position: relative;
 }
 
+.logo,
+.logo img,
+.badge,
+.aura-logo-hero,
+.warp-text:has(.warp-word:first-child) {
+    unicode-bidi: isolate;
+}
+
+html[dir="rtl"] .hero h2,
+html[dir="rtl"] #about h2,
+html[dir="rtl"] .logo,
+html[dir="rtl"] .badge {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
 .warp-word {
     display: inline-block;
     white-space: nowrap;

@@ -168,8 +168,11 @@ header {
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
     padding: 12px 8%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    direction: ltr;
+    grid-template-columns: minmax(96px, auto) 1fr auto minmax(142px, auto);
+    grid-template-areas: "language nav contact logo";
+    column-gap: 24px;
     align-items: center;
     transition: background 0.3s ease;
 }
@@ -180,6 +183,8 @@ header.scrolled {
 }
 
 .logo {
+    grid-area: logo;
+    justify-self: end;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -205,6 +210,8 @@ header.scrolled {
 }
 
 nav ul {
+    grid-area: nav;
+    justify-content: center;
     display: flex;
     align-items: center;
     list-style: none;
@@ -266,6 +273,7 @@ nav a.active::after {
 }
 
 .btn-contact {
+    grid-area: contact;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -302,10 +310,10 @@ nav a.active::after {
 }
 
 .language-menu {
-    left: 8%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    grid-area: language;
+    justify-self: start;
+    min-width: 0;
+    position: relative;
 }
 .language-toggle { align-items: center; display: inline-flex; gap: 8px; }
 .language-toggle i { color: var(--accent-gold); }
@@ -1247,10 +1255,14 @@ footer {
 @media (max-width: 768px) {
     header {
         gap: 10px;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas: "language logo contact";
         padding: 12px 5%;
     }
 
-    .language-menu { left: 5%; }
+    .language-menu { justify-self: start; }
+
+    .logo { justify-self: center; }
 
     .aura-logo-image {
         height: 48px;
@@ -1261,6 +1273,12 @@ footer {
         flex: 0 0 auto;
         font-size: 12px;
         padding: 7px 10px;
+    }
+
+    .btn-contact {
+        font-size: 12px;
+        padding: 8px 12px;
+        white-space: nowrap;
     }
 
     nav ul { display: none; }

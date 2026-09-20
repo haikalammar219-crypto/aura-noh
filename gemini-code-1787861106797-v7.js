@@ -310,6 +310,8 @@ function setupLanguageMenu() {
         option.setAttribute('role', 'option');
         option.setAttribute('aria-selected', String(code === current));
         option.addEventListener('click', () => {
+            menu.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
             localStorage.setItem('aura-language', code);
             const clearCookie = `${'googtrans'}=; Max-Age=0; path=/`;
             document.cookie = clearCookie;
@@ -340,6 +342,8 @@ function setupLanguageMenu() {
             toggle.setAttribute('aria-expanded', 'false');
         }
     });
+
+    if (current === 'ar' || current === 'en') return;
 
     window.googleTranslateElementInit = () => {
         if (!window.google?.translate || document.getElementById('google_translate_element')) return;

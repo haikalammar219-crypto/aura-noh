@@ -336,6 +336,16 @@ nav a.active::after {
 .language-option:hover,
 .language-option[aria-selected="true"] { background: rgba(212, 175, 55, 0.14); color: var(--accent-gold-light); }
 #google_translate_element { display: none; }
+.goog-te-gadget,
+.goog-te-gadget-simple,
+.goog-te-combo,
+#goog-gt-tt,
+#goog-gt-vt,
+.VIpgJd-yAWNEb-L7lbkb,
+.VIpgJd-yAWNEb-hvhgNd {
+    display: none !important;
+    visibility: hidden !important;
+}
 .goog-te-banner-frame,
 .goog-te-banner-frame.skiptranslate,
 iframe.goog-te-banner-frame {

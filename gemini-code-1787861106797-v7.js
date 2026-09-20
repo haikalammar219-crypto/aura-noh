@@ -930,14 +930,65 @@ const consultationMessages = {
     pt: { success: 'Seu pedido foi recebido. Entraremos em contato em breve.', error: 'Não foi possível enviar o pedido. Tente novamente.' },
     hi: { success: 'आपका अनुरोध प्राप्त हो गया है। हम जल्द ही आपसे संपर्क करेंगे।', error: 'अनुरोध भेजा नहीं जा सका। कृपया पुनः प्रयास करें।' }
 };
+const consultationValidation = {
+    ar: { name: 'يرجى كتابة الاسم.', country: 'يرجى اختيار مفتاح الدولة.', phone: 'يرجى كتابة رقم هاتف صحيح.', email: 'يرجى كتابة بريد إلكتروني صحيح.', consent: 'يرجى الموافقة على التواصل معك.' },
+    en: { name: 'Please enter your name.', country: 'Please select a country code.', phone: 'Please enter a valid phone number.', email: 'Please enter a valid email address.', consent: 'Please agree to be contacted.' },
+    es: { name: 'Escribe tu nombre.', country: 'Selecciona el código de país.', phone: 'Escribe un número de teléfono válido.', email: 'Escribe un correo electrónico válido.', consent: 'Acepta que te contactemos.' },
+    fr: { name: 'Veuillez saisir votre nom.', country: 'Veuillez choisir un indicatif de pays.', phone: 'Veuillez saisir un numéro valide.', email: 'Veuillez saisir une adresse e-mail valide.', consent: 'Veuillez accepter d’être contacté.' },
+    de: { name: 'Bitte geben Sie Ihren Namen ein.', country: 'Bitte wählen Sie eine Ländervorwahl.', phone: 'Bitte geben Sie eine gültige Telefonnummer ein.', email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.', consent: 'Bitte stimmen Sie der Kontaktaufnahme zu.' },
+    'zh-CN': { name: '请输入您的姓名。', country: '请选择国家/地区代码。', phone: '请输入有效的电话号码。', email: '请输入有效的电子邮箱地址。', consent: '请同意我们与您联系。' },
+    ur: { name: 'براہ کرم اپنا نام درج کریں۔', country: 'براہ کرم ملکی کوڈ منتخب کریں۔', phone: 'براہ کرم درست فون نمبر درج کریں۔', email: 'براہ کرم درست ای میل درج کریں۔', consent: 'براہ کرم رابطے کی اجازت دیں۔' },
+    fa: { name: 'لطفاً نام خود را وارد کنید.', country: 'لطفاً کد کشور را انتخاب کنید.', phone: 'لطفاً شماره تلفن معتبر وارد کنید.', email: 'لطفاً ایمیل معتبر وارد کنید.', consent: 'لطفاً با تماس موافقت کنید.' },
+    tr: { name: 'Lütfen adınızı girin.', country: 'Lütfen ülke kodunu seçin.', phone: 'Lütfen geçerli bir telefon numarası girin.', email: 'Lütfen geçerli bir e-posta adresi girin.', consent: 'Lütfen iletişim kurulmasını kabul edin.' },
+    pt: { name: 'Digite seu nome.', country: 'Selecione o código do país.', phone: 'Digite um número de telefone válido.', email: 'Digite um e-mail válido.', consent: 'Aceite ser contatado.' },
+    hi: { name: 'कृपया अपना नाम दर्ज करें।', country: 'कृपया देश कोड चुनें।', phone: 'कृपया मान्य फोन नंबर दर्ज करें।', email: 'कृपया मान्य ईमेल दर्ज करें।', consent: 'कृपया संपर्क किए जाने की सहमति दें।' }
+};
+
+function clearConsultationError(field) {
+    field?.removeAttribute('aria-invalid');
+    field?.parentElement?.querySelector('.consultation-field-error')?.remove();
+}
+
+function showConsultationError(field, message) {
+    clearConsultationError(field);
+    field.setAttribute('aria-invalid', 'true');
+    const error = document.createElement('span');
+    error.className = 'consultation-field-error';
+    error.setAttribute('role', 'alert');
+    error.textContent = message;
+    field.parentElement.append(error);
+}
 
 if (consultationForm) {
+    consultationForm.querySelectorAll('input, select').forEach(field => {
+        field.addEventListener('input', () => clearConsultationError(field));
+        field.addEventListener('change', () => clearConsultationError(field));
+    });
     consultationForm.addEventListener('submit', async event => {
         event.preventDefault();
         const submitButton = consultationForm.querySelector('button[type="submit"]');
         const formData = new FormData(consultationForm);
         const language = document.documentElement.lang || 'ar';
         const messages = consultationMessages[language] || consultationMessages.en;
+        const validation = consultationValidation[language] || consultationValidation.en;
+        const nameField = consultationForm.elements.name;
+        const countryField = consultationForm.elements.countryCode;
+        const phoneField = consultationForm.elements.phone;
+        const emailField = consultationForm.elements.email;
+        const consentField = consultationForm.elements.consent;
+        const email = String(formData.get('email') || '').trim();
+        const errors = [
+            !String(formData.get('name') || '').trim() && [nameField, validation.name],
+            !String(formData.get('countryCode') || '').trim() && [countryField, validation.country],
+            String(formData.get('phone') || '').replace(/\D/g, '').length < 6 && [phoneField, validation.phone],
+            email && !/^\S+@\S+\.\S+$/.test(email) && [emailField, validation.email],
+            !consentField.checked && [consentField, validation.consent]
+        ].filter(Boolean);
+        if (errors.length) {
+            errors.forEach(([field, message]) => showConsultationError(field, message));
+            errors[0][0].focus();
+            return;
+        }
         submitButton.disabled = true;
         consultationStatus.textContent = '';
 

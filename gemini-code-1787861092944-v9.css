@@ -1009,6 +1009,18 @@ html[dir="rtl"] .badge {
     text-align: center;
 }
 
+.consultation-field-error {
+    color: #ffadad;
+    font-size: 13px;
+    min-height: 0;
+    padding-top: 2px;
+}
+
+.consultation-form [aria-invalid="true"] {
+    border-color: #e88b8b;
+    box-shadow: 0 0 0 3px rgba(232, 139, 139, 0.1);
+}
+
 .reviews-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);

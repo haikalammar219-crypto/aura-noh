@@ -244,8 +244,10 @@ function translateText(language) {
     if (pageTitles[currentPage]) document.title = pageTitles[currentPage][language === 'en' ? 1 : 0];
     const toggle = document.getElementById('language-toggle');
     if (toggle) {
-        toggle.textContent = language === 'en' ? 'العربية' : 'English';
-        toggle.setAttribute('aria-label', language === 'en' ? 'Switch to Arabic' : 'Switch to English');
+        const label = languageOptions?.find(([code]) => code === language)?.[1] || (language === 'ar' ? 'العربية' : 'English');
+        const labelElement = toggle.querySelector('span');
+        if (labelElement) labelElement.textContent = label;
+        toggle.setAttribute('aria-label', 'Choose language');
     }
     updateReviewLanguage(language);
 }

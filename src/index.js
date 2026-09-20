@@ -15,6 +15,22 @@ export default {
 			if (url.protocol === "https:") headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
 			return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 		};
+		const sendBrevoEmail = async ({ to, subject, text, replyTo }) => {
+			if (!env.BREVO_API_KEY) return false;
+			const payload = {
+				sender: { email: env.BREVO_FROM_EMAIL || "ammar.h@auraenter.com", name: "AURA ENTERPRISE" },
+				to: [{ email: to }],
+				subject,
+				textContent: text,
+			};
+			if (replyTo) payload.replyTo = { email: replyTo };
+			const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+				method: "POST",
+				headers: { "api-key": env.BREVO_API_KEY, "Content-Type": "application/json", Accept: "application/json" },
+				body: JSON.stringify(payload),
+			});
+			return response.ok;
+		};
 
 		if (url.pathname === "/") {
 			return withSecurityHeaders(await env.ASSETS.fetch(
@@ -117,6 +133,7 @@ export default {
 			const phone = String(payload.phone || "").trim().replace(/[^0-9\s().+-]/g, "").slice(0, 24);
 			const email = String(payload.email || "").trim().slice(0, 160);
 			const service = String(payload.service || "").trim().slice(0, 120);
+			const language = String(payload.language || "ar").trim().slice(0, 12);
 			const fullPhoneDigits = `${countryCode}${phone}`.replace(/\D/g, "");
 			if (!name || !/^\+[0-9]{1,15}$/.test(countryCode) || fullPhoneDigits.length < 8 || fullPhoneDigits.length > 15 || (email && !/^\S+@\S+\.\S+$/.test(email)) || payload.consent !== true) {
 				return withSecurityHeaders(Response.json({ error: "Please complete the required consultation fields." }, { status: 400 }));
@@ -136,6 +153,26 @@ export default {
 			await env.DB.prepare(
 				"INSERT INTO consultations (name, country_code, phone, email, service) VALUES (?, ?, ?, ?, ?)",
 			).bind(name, countryCode, phone, email || null, service || null).run();
+
+			const ownerEmail = env.CONSULTATION_OWNER_EMAIL || "ammar.h@auraenter.com";
+			const subject = language === "ar" ? "طلب استشارة مجانية جديد" : "New free consultation request";
+			const ownerText = [
+				"AURA ENTERPRISE - Consultation request",
+				`Name: ${name}`,
+				`Phone: ${countryCode} ${phone}`,
+				`Email: ${email || "Not provided"}`,
+				`Service: ${service || "General consultation"}`,
+			].join("\n");
+			await Promise.allSettled([
+				sendBrevoEmail({ to: ownerEmail, subject, text: ownerText, replyTo: email || ownerEmail }),
+				email ? sendBrevoEmail({
+					to: email,
+					subject: language === "ar" ? "تم استلام طلب الاستشارة" : "Your consultation request was received",
+					text: language === "ar"
+						? "تم استلام طلب الاستشارة الخاص بك بنجاح. سيتم التواصل معك قريبًا من فريق AURA ENTERPRISE. هذا بريد تلقائي، يرجى عدم الرد عليه."
+						: "Your consultation request was received successfully. The AURA ENTERPRISE team will contact you soon. This is an automated email; please do not reply.",
+				}) : Promise.resolve(false),
+			]);
 			return withSecurityHeaders(Response.json({ message: "Consultation request received." }, { status: 201 }));
 		}
 

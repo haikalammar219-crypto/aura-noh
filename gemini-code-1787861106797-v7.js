@@ -1015,6 +1015,7 @@ if (consultationForm) {
                     phone: formData.get('phone'),
                     email: formData.get('email'),
                     service: formData.get('service'),
+                    language,
                     consent: formData.get('consent') === 'on',
                     website: formData.get('website')
                 })

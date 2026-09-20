@@ -793,7 +793,7 @@ if (ratingPicker) {
     const previewRating = value => {
         if (!value) return;
         paintRating(value, true);
-        const language = document.documentElement.lang === 'en' ? 'en' : 'ar';
+        const language = document.documentElement.lang || 'ar';
         ratingTip.textContent = ratingLabels[language][value - 1];
         const star = ratingPicker.querySelector(`[data-rating="${value}"]`);
         ratingTip.style.left = `${star.offsetLeft + star.offsetWidth / 2}px`;

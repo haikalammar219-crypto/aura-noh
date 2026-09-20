@@ -7,7 +7,7 @@ export default {
 			"X-Frame-Options": "DENY",
 			"Referrer-Policy": "strict-origin-when-cross-origin",
 			"Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-			"Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+			"Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
 		};
 		const withSecurityHeaders = response => {
 			const headers = new Headers(response.headers);
@@ -112,11 +112,13 @@ export default {
 
 			if (String(payload.website || "").trim()) return withSecurityHeaders(Response.json({ message: "Consultation request received." }, { status: 201 }));
 			const name = String(payload.name || "").trim().slice(0, 80);
-			const countryCode = String(payload.countryCode || "").trim().slice(0, 8);
+			const countryCodeDigits = String(payload.countryCode || "").replace(/\D/g, "").slice(0, 15);
+			const countryCode = countryCodeDigits ? `+${countryCodeDigits}` : "";
 			const phone = String(payload.phone || "").trim().replace(/[^0-9\s().+-]/g, "").slice(0, 24);
 			const email = String(payload.email || "").trim().slice(0, 160);
 			const service = String(payload.service || "").trim().slice(0, 120);
-			if (!name || !/^\+[0-9]{1,4}$/.test(countryCode) || phone.replace(/\D/g, "").length < 6 || (email && !/^\S+@\S+\.\S+$/.test(email)) || payload.consent !== true) {
+			const fullPhoneDigits = `${countryCode}${phone}`.replace(/\D/g, "");
+			if (!name || !/^\+[0-9]{1,15}$/.test(countryCode) || fullPhoneDigits.length < 8 || fullPhoneDigits.length > 15 || (email && !/^\S+@\S+\.\S+$/.test(email)) || payload.consent !== true) {
 				return withSecurityHeaders(Response.json({ error: "Please complete the required consultation fields." }, { status: 400 }));
 			}
 

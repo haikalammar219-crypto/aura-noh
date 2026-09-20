@@ -959,6 +959,19 @@ function showConsultationError(field, message) {
     field.parentElement.append(error);
 }
 
+function isValidConsultationPhone(countryCode, phone) {
+    const normalizedCode = String(countryCode || '').replace(/[^+0-9]/g, '');
+    const normalizedPhone = String(phone || '').replace(/[^0-9]/g, '');
+    if (!normalizedCode || normalizedPhone.length < 4) return false;
+    const internationalNumber = `${normalizedCode}${normalizedPhone}`;
+    const parser = window.libphonenumber?.parsePhoneNumberFromString;
+    if (typeof parser === 'function') {
+        const parsed = parser(internationalNumber);
+        return Boolean(parsed?.isValid());
+    }
+    return internationalNumber.replace(/\D/g, '').length >= 8 && internationalNumber.replace(/\D/g, '').length <= 15;
+}
+
 if (consultationForm) {
     consultationForm.querySelectorAll('input, select').forEach(field => {
         field.addEventListener('input', () => clearConsultationError(field));
@@ -980,7 +993,7 @@ if (consultationForm) {
         const errors = [
             !String(formData.get('name') || '').trim() && [nameField, validation.name],
             !String(formData.get('countryCode') || '').trim() && [countryField, validation.country],
-            String(formData.get('phone') || '').replace(/\D/g, '').length < 6 && [phoneField, validation.phone],
+            !isValidConsultationPhone(formData.get('countryCode'), formData.get('phone')) && [phoneField, validation.phone],
             email && !/^\S+@\S+\.\S+$/.test(email) && [emailField, validation.email],
             !consentField.checked && [consentField, validation.consent]
         ].filter(Boolean);

@@ -280,7 +280,7 @@ const reviewCopy = {
 };
 
 function updateReviewLanguage(language) {
-    const copy = reviewCopy[language];
+    const copy = reviewCopy[language] || reviewCopy.en;
     const nameInput = document.getElementById('review-name');
     const commentInput = document.getElementById('review-comment');
     const ratingPicker = document.querySelector('.peek-rating');
@@ -375,11 +375,7 @@ function setupLanguageMenu() {
 
 setupLanguageMenu();
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
-if (savedLanguage === 'ar' || savedLanguage === 'en') translateText(savedLanguage);
-else {
-    document.documentElement.lang = savedLanguage;
-    document.documentElement.dir = ['ur', 'fa'].includes(savedLanguage) ? 'rtl' : 'ltr';
-}
+translateText(savedLanguage);
 setupWarpText();
 
 const currentPage = window.location.pathname.split('/').pop() || 'Main-v6.html';

@@ -286,8 +286,69 @@ function updateReviewLanguage(language) {
     });
 }
 
+const languageOptions = [
+    ['ar', 'العربية'], ['en', 'English'], ['es', 'Español'], ['ur', 'اردو'], ['zh-CN', '中文'],
+    ['fr', 'Français'], ['de', 'Deutsch'], ['hi', 'हिन्दी'], ['pt', 'Português'], ['tr', 'Türkçe']
+];
+
+function setupLanguageMenu() {
+    const menu = document.getElementById('language-menu');
+    const toggle = document.getElementById('language-toggle');
+    const options = menu?.querySelector('.language-options');
+    if (!menu || !toggle || !options) return;
+    const current = localStorage.getItem('aura-language') || 'ar';
+    const currentLabel = languageOptions.find(([code]) => code === current)?.[1] || 'العربية';
+    toggle.querySelector('span').textContent = currentLabel;
+    options.replaceChildren(...languageOptions.map(([code, label]) => {
+        const option = document.createElement('button');
+        option.type = 'button';
+        option.className = 'language-option';
+        option.dataset.language = code;
+        option.textContent = label;
+        option.setAttribute('role', 'option');
+        option.setAttribute('aria-selected', String(code === current));
+        option.addEventListener('click', () => {
+            localStorage.setItem('aura-language', code);
+            document.cookie = code === 'ar' ? 'googtrans=; Max-Age=0; path=/' : `googtrans=/ar/${code}; path=/`;
+            window.location.reload();
+        });
+        return option;
+    }));
+    toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', event => {
+        if (!menu.contains(event.target)) {
+            menu.classList.remove('is-open');
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    window.googleTranslateElementInit = () => {
+        if (!window.google?.translate || document.getElementById('google_translate_element')) return;
+        const host = document.createElement('div');
+        host.id = 'google_translate_element';
+        document.body.appendChild(host);
+        new window.google.translate.TranslateElement({
+            pageLanguage: 'ar',
+            includedLanguages: 'en,es,ur,zh-CN,fr,de,hi,pt,tr',
+            autoDisplay: false
+        }, 'google_translate_element');
+    };
+    const script = document.createElement('script');
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.head.appendChild(script);
+}
+
+setupLanguageMenu();
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
-translateText(savedLanguage);
+if (savedLanguage === 'ar' || savedLanguage === 'en') translateText(savedLanguage);
+else {
+    document.documentElement.lang = savedLanguage;
+    document.documentElement.dir = savedLanguage === 'ur' ? 'rtl' : 'ltr';
+}
 setupWarpText();
 
 const currentPage = window.location.pathname.split('/').pop() || 'Main-v6.html';
@@ -490,9 +551,3 @@ if (reviewForm) {
     });
     loadReviews();
 }
-
-const languageToggle = document.getElementById('language-toggle');
-if (languageToggle) languageToggle.addEventListener('click', function() {
-    localStorage.setItem('aura-language', document.documentElement.lang === 'ar' ? 'en' : 'ar');
-    window.location.reload();
-});

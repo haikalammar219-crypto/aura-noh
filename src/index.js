@@ -7,7 +7,7 @@ export default {
 			"X-Frame-Options": "DENY",
 			"Referrer-Policy": "strict-origin-when-cross-origin",
 			"Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-			"Content-Security-Policy": "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+			"Content-Security-Policy": "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://translate.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://translate.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://translate.google.com; connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com https://translate.googleapis.com; frame-src https://translate.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
 		};
 		const withSecurityHeaders = response => {
 			const headers = new Headers(response.headers);

@@ -301,6 +301,44 @@ nav a.active::after {
     background: rgba(212, 175, 55, 0.12);
 }
 
+.language-menu { position: relative; }
+.language-toggle { align-items: center; display: inline-flex; gap: 8px; }
+.language-toggle i { color: var(--accent-gold); }
+.language-options {
+    background: rgba(19, 27, 46, 0.98);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+    display: grid;
+    gap: 3px;
+    min-width: 150px;
+    opacity: 0;
+    padding: 7px;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    transform: translateY(-6px);
+    transition: opacity 180ms ease, transform 180ms ease;
+    z-index: 1100;
+}
+.language-menu.is-open .language-options { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.language-option {
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    color: var(--text-main);
+    cursor: pointer;
+    font: inherit;
+    padding: 8px 10px;
+    text-align: start;
+}
+.language-option:hover,
+.language-option[aria-selected="true"] { background: rgba(212, 175, 55, 0.14); color: var(--accent-gold-light); }
+#google_translate_element { display: none; }
+.goog-te-banner-frame.skiptranslate { display: none !important; }
+body { top: 0 !important; }
+
 /* Hero Section */
 .hero {
     min-height: 100vh;

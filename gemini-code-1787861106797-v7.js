@@ -276,7 +276,16 @@ const reviewCopy = {
         loading: 'Submitting your review...',
         success: 'Thank you. Your review was received and will appear after approval.',
         error: 'Something went wrong. Please try again.'
-    }
+    },
+    es: { namePlaceholder: 'Escribe tu nombre', commentPlaceholder: '¿Cómo fue tu experiencia?', ratingLabel: 'Elige tu valoración', stars: ['Una estrella', 'Dos estrellas', '3 estrellas', '4 estrellas', '5 estrellas'], empty: 'Pronto aparecerán las opiniones.', loading: 'Enviando tu opinión...', success: 'Gracias. Recibimos tu opinión y aparecerá después de su revisión.', error: 'Algo salió mal. Inténtalo de nuevo.' },
+    fr: { namePlaceholder: 'Entrez votre nom', commentPlaceholder: 'Comment était votre expérience ?', ratingLabel: 'Choisissez votre évaluation', stars: ['Une étoile', 'Deux étoiles', '3 étoiles', '4 étoiles', '5 étoiles'], empty: 'Les avis apparaîtront bientôt.', loading: 'Envoi de votre avis...', success: 'Merci. Votre avis a été reçu et apparaîtra après validation.', error: 'Une erreur est survenue. Réessayez.' },
+    de: { namePlaceholder: 'Geben Sie Ihren Namen ein', commentPlaceholder: 'Wie war Ihre Erfahrung?', ratingLabel: 'Bewertung auswählen', stars: ['Ein Stern', 'Zwei Sterne', '3 Sterne', '4 Sterne', '5 Sterne'], empty: 'Bewertungen werden bald angezeigt.', loading: 'Bewertung wird gesendet...', success: 'Vielen Dank. Ihre Bewertung wurde empfangen und erscheint nach der Prüfung.', error: 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.' },
+    'zh-CN': { namePlaceholder: '请输入您的姓名', commentPlaceholder: '您的体验如何？', ratingLabel: '选择评分', stars: ['一颗星', '两颗星', '3颗星', '4颗星', '5颗星'], empty: '评价即将显示。', loading: '正在提交评价...', success: '谢谢。您的评价已收到，审核后将显示。', error: '出现问题，请重试。' },
+    ur: { namePlaceholder: 'اپنا نام لکھیں', commentPlaceholder: 'آپ کا تجربہ کیسا رہا؟', ratingLabel: 'درجہ بندی منتخب کریں', stars: ['ایک ستارہ', 'دو ستارے', '3 ستارے', '4 ستارے', '5 ستارے'], empty: 'آراء جلد یہاں ظاہر ہوں گی۔', loading: 'آپ کی رائے بھیجی جا رہی ہے...', success: 'شکریہ۔ آپ کی رائے موصول ہو گئی ہے اور منظوری کے بعد ظاہر ہوگی۔', error: 'کچھ غلط ہو گیا، دوبارہ کوشش کریں۔' },
+    fa: { namePlaceholder: 'نام خود را وارد کنید', commentPlaceholder: 'تجربه شما چگونه بود؟', ratingLabel: 'امتیاز خود را انتخاب کنید', stars: ['یک ستاره', 'دو ستاره', '۳ ستاره', '۴ ستاره', '۵ ستاره'], empty: 'نظرات به‌زودی نمایش داده می‌شوند.', loading: 'در حال ارسال نظر...', success: 'متشکریم. نظر شما دریافت شد و پس از بررسی نمایش داده می‌شود.', error: 'مشکلی پیش آمد. دوباره تلاش کنید.' },
+    hi: { namePlaceholder: 'अपना नाम लिखें', commentPlaceholder: 'आपका अनुभव कैसा रहा?', ratingLabel: 'अपनी रेटिंग चुनें', stars: ['एक सितारा', 'दो सितारे', '3 सितारे', '4 सितारे', '5 सितारे'], empty: 'समीक्षाएं जल्द दिखाई देंगी।', loading: 'समीक्षा भेजी जा रही है...', success: 'धन्यवाद। आपकी समीक्षा प्राप्त हो गई है और स्वीकृति के बाद दिखाई देगी।', error: 'कुछ गलत हुआ। कृपया फिर प्रयास करें।' },
+    pt: { namePlaceholder: 'Digite seu nome', commentPlaceholder: 'Como foi sua experiência?', ratingLabel: 'Escolha sua avaliação', stars: ['Uma estrela', 'Duas estrelas', '3 estrelas', '4 estrelas', '5 estrelas'], empty: 'As avaliações aparecerão em breve.', loading: 'Enviando sua avaliação...', success: 'Obrigado. Sua avaliação foi recebida e aparecerá após a análise.', error: 'Algo deu errado. Tente novamente.' },
+    tr: { namePlaceholder: 'Adınızı yazın', commentPlaceholder: 'Deneyiminiz nasıldı?', ratingLabel: 'Puanınızı seçin', stars: ['Bir yıldız', 'İki yıldız', '3 yıldız', '4 yıldız', '5 yıldız'], empty: 'Yorumlar yakında görünecek.', loading: 'Yorumunuz gönderiliyor...', success: 'Teşekkürler. Yorumunuz alındı ve incelemeden sonra yayınlanacak.', error: 'Bir sorun oluştu. Lütfen tekrar deneyin.' }
 };
 
 function updateReviewLanguage(language) {
@@ -372,6 +381,24 @@ const sharedLocalCopy = {
         'ربط الشركات بالفرص والشركاء المناسبين، وتسهيل الصفقات التجارية والاستثمارية الموثوقة.': 'کمپنیوں کو مناسب مواقع اور شراکت داروں سے جوڑنا اور قابل اعتماد تجارتی و سرمایہ کاری کے معاہدوں کو آسان بنانا۔',
         'إدارة عمليات الاستيراد والتصدير والتجارة العامة عبر أسواق الإمارات والأسواق العالمية.': 'متحدہ عرب امارات اور عالمی منڈیوں میں درآمد، برآمد اور عمومی تجارت کے امور کا انتظام۔',
         'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': 'افراد اور کمپنیوں کے لیے ڈیجیٹل مارکیٹنگ کے حل تاکہ مضبوط موجودگی اور مناسب صارفین تک رسائی حاصل ہو۔'
+    },
+    fa: {
+        'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'ما یک شرکت پیشرو ثبت‌شده در امارات متحده عربی هستیم و به رشد و توسعه کسب‌وکارها بر اساس جدیدترین استانداردهای جهانی کمک می‌کنیم.',
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط والعالم.': 'شریک برگزیده شرکت‌ها و مؤسسات منطقه‌ای و بین‌المللی برای دستیابی به برتری و نوآوری در امارات، خاورمیانه و جهان باشیم.',
+        'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'ارائه خدمات و راهکارهای جهانی برای دستیابی شرکای ما به بالاترین سطح عملکرد، پایداری و سودآوری.',
+        'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': 'شفافیت، کیفیت جامع، تعهد به برتری و ایجاد روابط بلندمدت با مشتریان و شرکای ما.',
+        'ربط الشركات بالفرص والشركاء المناسبين، وتسهيل الصفقات التجارية والاستثمارية الموثوقة.': 'ارتباط شرکت‌ها با فرصت‌ها و شرکای مناسب و تسهیل معاملات تجاری و سرمایه‌گذاری قابل اعتماد.',
+        'إدارة عمليات الاستيراد والتصدير والتجارة العامة عبر أسواق الإمارات والأسواق العالمية.': 'مدیریت عملیات واردات، صادرات و تجارت عمومی در بازارهای امارات و جهان.',
+        'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': 'راهکارهای بازاریابی دیجیتال برای افراد و شرکت‌ها جهت ایجاد حضور قوی‌تر و دسترسی به مشتریان مناسب.'
+    },
+    tr: {
+        'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'Birleşik Arap Emirlikleri’nde kayıtlı lider bir şirket olarak işletmelerin küresel standartlara göre büyümesine ve genişlemesine yardımcı oluyoruz.',
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط والعالم.': 'BAE, Orta Doğu ve dünya pazarlarında mükemmellik ve yenilik arayan şirketlerin tercih ettiği ortak olmak.',
+        'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'Ortaklarımızın en yüksek performans, sürdürülebilirlik ve kârlılık seviyelerine ulaşmasını sağlayan dünya standartlarında hizmetler sunmak.',
+        'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': 'Şeffaflık, toplam kalite, mükemmellik taahhüdü ve müşterilerimizle uzun vadeli ilişkiler kurmak.',
+        'ربط الشركات بالفرص والشركاء المناسبين، وتسهيل الصفقات التجارية والاستثمارية الموثوقة.': 'Şirketleri doğru fırsat ve ortaklarla buluşturmak, güvenilir ticari ve yatırım anlaşmalarını kolaylaştırmak.',
+        'إدارة عمليات الاستيراد والتصدير والتجارة العامة عبر أسواق الإمارات والأسواق العالمية.': 'BAE ve küresel pazarlarda ithalat, ihracat ve genel ticaret operasyonlarını yönetmek.',
+        'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': 'Bireyler ve şirketler için daha güçlü bir çevrim içi varlık ve doğru müşterilere erişim sağlayan dijital pazarlama çözümleri.'
     }
 };
 

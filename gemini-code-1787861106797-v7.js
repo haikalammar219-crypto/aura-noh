@@ -308,6 +308,8 @@ const languageOptions = [
 
 const localLanguagePacks = {
     es: {
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': 'Ser el socio preferido de empresas e instituciones regionales e internacionales que buscan excelencia e innovación en los mercados de los EAU y Oriente Medio.',
+        '© 2026 AURA ENTERPRISE FZE LLC. جميع الحقوق محفوظة.': '© 2026 AURA ENTERPRISE FZE LLC. Todos los derechos reservados.',
         'عن الشركة': 'Acerca de la empresa', 'مجالات العمل': 'Áreas de trabajo', 'التواصل': 'Contacto', 'تواصل معنا': 'Contáctanos', 'آراء العملاء': 'Opiniones de los clientes',
         'من نحن': 'Quiénes somos', 'رؤيتنا': 'Nuestra visión', 'مهمتنا': 'Nuestra misión', 'قيمنا': 'Nuestros valores', 'مجالات التميز': 'Áreas de excelencia', 'مباشرة التواصل': 'Ponte en contacto',
         'خدماتنا الاستراتيجية': 'Nuestros servicios estratégicos', 'التجارة والاستثمار والوساطة التجارية': 'Comercio, inversión y corretaje comercial', 'الاستيراد والتصدير والتجارة العامة': 'Importación, exportación y comercio general', 'التسويق الإلكتروني': 'Agencia de marketing digital',
@@ -315,6 +317,8 @@ const localLanguagePacks = {
         'تواصل مع فريقنا': 'Contacta con nuestro equipo', 'شاركنا رأيك': 'Comparte tu experiencia', 'الاسم': 'Nombre', 'التقييم': 'Valoración', 'رسالتك': 'Tu mensaje', 'إرسال التقييم': 'Enviar opinión'
     },
     fr: {
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': 'Être le partenaire privilégié des entreprises et institutions régionales et internationales à la recherche d’excellence et d’innovation aux Émirats et au Moyen-Orient.',
+        '© 2026 AURA ENTERPRISE FZE LLC. جميع الحقوق محفوظة.': '© 2026 AURA ENTERPRISE FZE LLC. Tous droits réservés.',
         'عن الشركة': "À propos de l'entreprise", 'مجالات العمل': "Domaines d'activité", 'التواصل': 'Contact', 'تواصل معنا': 'Contactez-nous', 'آراء العملاء': 'Avis clients',
         'من نحن': 'Qui sommes-nous', 'رؤيتنا': 'Notre vision', 'مهمتنا': 'Notre mission', 'قيمنا': 'Nos valeurs', 'مجالات التميز': "Domaines d'excellence", 'مباشرة التواصل': 'Contactez-nous',
         'خدماتنا الاستراتيجية': 'Nos services stratégiques', 'التجارة والاستثمار والوساطة التجارية': 'Commerce, investissement et courtage commercial', 'الاستيراد والتصدير والتجارة العامة': 'Importation, exportation et commerce général', 'التسويق الإلكتروني': 'Agence de marketing digital',
@@ -322,6 +326,8 @@ const localLanguagePacks = {
         'تواصل مع فريقنا': 'Contactez notre équipe', 'شاركنا رأيك': 'Partagez votre expérience', 'الاسم': 'Nom', 'التقييم': 'Évaluation', 'رسالتك': 'Votre message', 'إرسال التقييم': 'Envoyer l’avis'
     },
     de: {
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': 'Der bevorzugte Partner für regionale und internationale Unternehmen und Institutionen auf der Suche nach Exzellenz und Innovation in den VAE und im Nahen Osten.',
+        '© 2026 AURA ENTERPRISE FZE LLC. جميع الحقوق محفوظة.': '© 2026 AURA ENTERPRISE FZE LLC. Alle Rechte vorbehalten.',
         'عن الشركة': 'Über das Unternehmen', 'مجالات العمل': 'Arbeitsbereiche', 'التواصل': 'Kontakt', 'تواصل معنا': 'Kontaktieren Sie uns', 'آراء العملاء': 'Kundenbewertungen',
         'من نحن': 'Wer sind wir', 'رؤيتنا': 'Unsere Vision', 'مهمتنا': 'Unsere Mission', 'قيمنا': 'Unsere Werte', 'مجالات التميز': 'Kompetenzbereiche', 'مباشرة التواصل': 'Kontakt aufnehmen',
         'خدماتنا الاستراتيجية': 'Unsere strategischen Dienstleistungen', 'التجارة والاستثمار والوساطة التجارية': 'Handel, Investitionen und Handelsvermittlung', 'الاستيراد والتصدير والتجارة العامة': 'Import, Export und allgemeiner Handel', 'التسويق الإلكتروني': 'Digitalmarketing-Agentur',
@@ -329,16 +335,22 @@ const localLanguagePacks = {
         'تواصل مع فريقنا': 'Kontaktieren Sie unser Team', 'شاركنا رأيك': 'Teilen Sie Ihre Erfahrung', 'الاسم': 'Name', 'التقييم': 'Bewertung', 'رسالتك': 'Ihre Nachricht', 'إرسال التقييم': 'Bewertung senden'
     },
     'zh-CN': {
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': '成为地区和国际企业及机构在阿联酋和中东市场追求卓越与创新时的首选合作伙伴。',
+        '© 2026 AURA ENTERPRISE FZE LLC. جميع الحقوق محفوظة.': '© 2026 AURA ENTERPRISE FZE LLC。版权所有。',
         'عن الشركة': '关于公司', 'مجالات العمل': '业务领域', 'التواصل': '联系我们', 'تواصل معنا': '联系我们', 'آراء العملاء': '客户评价', 'من نحن': '关于我们', 'رؤيتنا': '我们的愿景', 'مهمتنا': '我们的使命', 'قيمنا': '我们的价值观',
         'مجالات التميز': '优势领域', 'مباشرة التواصل': '立即联系', 'خدماتنا الاستراتيجية': '我们的战略服务', 'التجارة والاستثمار والوساطة التجارية': '贸易、投资与商业经纪', 'الاستيراد والتصدير والتجارة العامة': '进出口与一般贸易', 'التسويق الإلكتروني': '数字营销机构',
         'شبكة أعمالنا': '我们的商业网络', 'حضور تجاري يتجاوز الحدود': '跨越边界的商业影响力', 'شراكة': '合作伙伴关系', 'عالمية المستوى': '世界级', 'استيراد وتصدير': '进出口', 'لوجستيات': '物流', 'تجارة': '贸易', 'تواصل مع فريقنا': '联系我们的团队', 'شاركنا رأيك': '分享您的体验', 'الاسم': '姓名', 'التقييم': '评价', 'رسالتك': '您的留言', 'إرسال التقييم': '提交评价'
     },
     ur: {
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': 'متحدہ عرب امارات اور مشرق وسطیٰ کی منڈیوں میں عمدگی اور جدت کے خواہاں علاقائی و بین الاقوامی اداروں کے لیے پسندیدہ شراکت دار بننا۔',
+        '© 2026 AURA ENTERPRISE FZE LLC. جميع الحقوق محفوظة.': '© 2026 AURA ENTERPRISE FZE LLC۔ جملہ حقوق محفوظ ہیں۔',
         'عن الشركة': 'کمپنی کا تعارف', 'مجالات العمل': 'کام کے شعبے', 'التواصل': 'رابطہ', 'تواصل معنا': 'ہم سے رابطہ کریں', 'آراء العملاء': 'صارفین کی آراء', 'من نحن': 'ہم کون ہیں', 'رؤيتنا': 'ہماری بصیرت', 'مهمتنا': 'ہمارا مشن', 'قيمنا': 'ہماری اقدار',
         'مجالات التميز': 'نمایاں شعبے', 'مباشرة التواصل': 'رابطہ کریں', 'خدماتنا الاستراتيجية': 'ہماری اسٹریٹجک خدمات', 'التجارة والاستثمار والوساطة التجارية': 'تجارت، سرمایہ کاری اور تجارتی بروکریج', 'الاستيراد والتصدير والتجارة العامة': 'درآمد، برآمد اور عمومی تجارت', 'التسويق الإلكتروني': 'ڈیجیٹل مارکیٹنگ ایجنسی',
         'شبكة أعمالنا': 'ہمارا کاروباری نیٹ ورک', 'حضور تجاري يتجاوز الحدود': 'سرحدوں سے آگے کاروباری موجودگی', 'شراكة': 'شراکت داری', 'عالمية المستوى': 'عالمی معیار', 'استيراد وتصدير': 'درآمد و برآمد', 'لوجستيات': 'لاجسٹکس', 'تجارة': 'تجارت', 'تواصل مع فريقنا': 'ہماری ٹیم سے رابطہ کریں', 'شاركنا رأيك': 'اپنا تجربہ شیئر کریں', 'الاسم': 'نام', 'التقييم': 'درجہ بندی', 'رسالتك': 'آپ کا پیغام', 'إرسال التقييم': 'جائزہ بھیجیں'
     },
     fa: {
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': 'شریک برگزیده شرکت‌ها و مؤسسات منطقه‌ای و بین‌المللی برای دستیابی به برتری و نوآوری در امارات و خاورمیانه باشیم.',
+        '© 2026 AURA ENTERPRISE FZE LLC. جميع الحقوق محفوظة.': '© 2026 AURA ENTERPRISE FZE LLC. تمامی حقوق محفوظ است.',
         'عن الشركة': 'درباره شرکت', 'مجالات العمل': 'حوزه‌های فعالیت', 'التواصل': 'تماس با ما', 'تواصل معنا': 'با ما تماس بگیرید', 'آراء العملاء': 'نظرات مشتریان', 'من نحن': 'درباره ما', 'رؤيتنا': 'چشم‌انداز ما', 'مهمتنا': 'ماموریت ما', 'قيمنا': 'ارزش‌های ما',
         'مجالات التميز': 'حوزه‌های برتری', 'مباشرة التواصل': 'تماس مستقیم', 'خدماتنا الاستراتيجية': 'خدمات راهبردی ما', 'التجارة والاستثمار والوساطة التجارية': 'تجارت، سرمایه‌گذاری و کارگزاری تجاری', 'الاستيراد والتصدير والتجارة العامة': 'واردات، صادرات و تجارت عمومی', 'التسويق الإلكتروني': 'آژانس بازاریابی دیجیتال',
         'شبكة أعمالنا': 'شبکه تجاری ما', 'حضور تجاري يتجاوز الحدود': 'حضور تجاری فراتر از مرزها', 'شراكة': 'مشارکت', 'عالمية المستوى': 'در سطح جهانی', 'استيراد وتصدير': 'واردات و صادرات', 'لوجستيات': 'لجستیک', 'تجارة': 'تجارت', 'تواصل مع فريقنا': 'با تیم ما تماس بگیرید', 'شاركنا رأيك': 'تجربه خود را به اشتراک بگذارید', 'الاسم': 'نام', 'التقييم': 'امتیازدهی', 'رسالتك': 'پیام شما', 'إرسال التقييم': 'ارسال نظر'
@@ -392,6 +404,8 @@ const sharedLocalCopy = {
         'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': 'راهکارهای بازاریابی دیجیتال برای افراد و شرکت‌ها جهت ایجاد حضور قوی‌تر و دسترسی به مشتریان مناسب.'
     },
     tr: {
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط.': 'BAE ve Orta Doğu pazarlarında mükemmellik ve yenilik arayan bölgesel ve uluslararası kurumların tercih ettiği ortak olmak.',
+        '© 2026 AURA ENTERPRISE FZE LLC. جميع الحقوق محفوظة.': '© 2026 AURA ENTERPRISE FZE LLC. Tüm hakları saklıdır.',
         'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'Birleşik Arap Emirlikleri’nde kayıtlı lider bir şirket olarak işletmelerin küresel standartlara göre büyümesine ve genişlemesine yardımcı oluyoruz.',
         'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط والعالم.': 'BAE, Orta Doğu ve dünya pazarlarında mükemmellik ve yenilik arayan şirketlerin tercih ettiği ortak olmak.',
         'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'Ortaklarımızın en yüksek performans, sürdürülebilirlik ve kârlılık seviyelerine ulaşmasını sağlayan dünya standartlarında hizmetler sunmak.',

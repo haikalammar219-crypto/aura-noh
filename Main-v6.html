@@ -52,6 +52,7 @@
             <h1 class="warp-text">حلول إستراتيجية وتجارية متكاملة بأسلوب <span>عصري وفاخر</span></h1>
             <p>نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.</p>
             <div class="hero-btns">
+                <a href="#consultation" class="btn-contact" style="padding: 12px 30px;">اطلب استشارة مجانية</a>
                 <a href="/services" class="btn-contact" style="padding: 12px 30px;">استكشف خدماتنا</a>
                 <a href="/about" class="btn-secondary">تعرّف علينا</a>
             </div>
@@ -192,6 +193,60 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Free Consultation Section -->
+    <section id="consultation" class="consultation-section">
+        <div class="section-title">
+            <p>استشارة مجانية</p>
+            <h2>اطلب استشارتك المجانية</h2>
+        </div>
+        <div class="consultation-layout">
+            <div class="consultation-intro">
+                <span class="consultation-icon"><i class="fa-solid fa-headset"></i></span>
+                <h3>دعنا نتواصل معك</h3>
+                <p>أرسل بياناتك وسيتواصل معك فريق AURA لمناقشة احتياجك وتقديم التوجيه المناسب.</p>
+            </div>
+            <form class="consultation-form" id="consultation-form">
+                <label for="consultation-name">الاسم</label>
+                <input id="consultation-name" name="name" type="text" maxlength="80" placeholder="اكتب اسمك" autocomplete="name" required>
+                <div class="phone-fields">
+                    <div>
+                        <label for="consultation-country">مفتاح الدولة</label>
+                        <select id="consultation-country" name="countryCode" autocomplete="tel-country-code" required>
+                            <option value="+971">الإمارات +971</option>
+                            <option value="+962">الأردن +962</option>
+                            <option value="+966">السعودية +966</option>
+                            <option value="+974">قطر +974</option>
+                            <option value="+965">الكويت +965</option>
+                            <option value="+20">مصر +20</option>
+                            <option value="+90">تركيا +90</option>
+                            <option value="+351">البرتغال +351</option>
+                            <option value="+91">الهند +91</option>
+                            <option value="+1">دولي +1</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="consultation-phone">رقم الهاتف</label>
+                        <input id="consultation-phone" name="phone" type="tel" inputmode="tel" maxlength="20" placeholder="50 123 4567" autocomplete="tel" required>
+                    </div>
+                </div>
+                <label for="consultation-email">البريد الإلكتروني</label>
+                <input id="consultation-email" name="email" type="email" maxlength="160" placeholder="name@example.com" autocomplete="email">
+                <label for="consultation-service">نوع الاستشارة</label>
+                <select id="consultation-service" name="service">
+                    <option value="">اختر نوع الاستشارة</option>
+                    <option value="التجارة والاستثمار والوساطة التجارية">التجارة والاستثمار والوساطة التجارية</option>
+                    <option value="الاستيراد والتصدير والتجارة العامة">الاستيراد والتصدير والتجارة العامة</option>
+                    <option value="التسويق الإلكتروني">التسويق الإلكتروني</option>
+                    <option value="استشارة عامة">استشارة عامة</option>
+                </select>
+                <label class="consultation-trap" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+                <label class="consultation-consent"><input name="consent" type="checkbox" required><span>أوافق على التواصل معي بخصوص طلب الاستشارة.</span></label>
+                <button class="btn-contact consultation-submit" type="submit"><i class="fa-solid fa-paper-plane"></i><span>إرسال طلب الاستشارة</span></button>
+                <p class="consultation-status" id="consultation-status" role="status"></p>
+            </form>
         </div>
     </section>
 

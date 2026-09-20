@@ -95,6 +95,48 @@ export default {
 			}
 		}
 
+		if (url.pathname === "/api/consultations") {
+			if (!env.DB) return withSecurityHeaders(Response.json({ error: "Consultation database is not configured." }, { status: 503 }));
+			if (request.method === "OPTIONS") return withSecurityHeaders(new Response(null, { status: 204 }));
+			if (request.method !== "POST") return withSecurityHeaders(new Response("Method Not Allowed", { status: 405 }));
+			if (origin && origin !== url.origin) return withSecurityHeaders(Response.json({ error: "Invalid origin." }, { status: 403 }));
+			if (request.headers.get("Content-Type")?.split(";")[0] !== "application/json") return withSecurityHeaders(Response.json({ error: "JSON is required." }, { status: 415 }));
+			if (Number(request.headers.get("Content-Length") || 0) > 10000) return withSecurityHeaders(Response.json({ error: "Request is too large." }, { status: 413 }));
+
+			let payload;
+			try {
+				payload = await request.json();
+			} catch {
+				return withSecurityHeaders(Response.json({ error: "Invalid request." }, { status: 400 }));
+			}
+
+			if (String(payload.website || "").trim()) return withSecurityHeaders(Response.json({ message: "Consultation request received." }, { status: 201 }));
+			const name = String(payload.name || "").trim().slice(0, 80);
+			const countryCode = String(payload.countryCode || "").trim().slice(0, 8);
+			const phone = String(payload.phone || "").trim().replace(/[^0-9\s().+-]/g, "").slice(0, 24);
+			const email = String(payload.email || "").trim().slice(0, 160);
+			const service = String(payload.service || "").trim().slice(0, 120);
+			if (!name || !/^\+[0-9]{1,4}$/.test(countryCode) || phone.replace(/\D/g, "").length < 6 || (email && !/^\S+@\S+\.\S+$/.test(email)) || payload.consent !== true) {
+				return withSecurityHeaders(Response.json({ error: "Please complete the required consultation fields." }, { status: 400 }));
+			}
+
+			await env.DB.prepare(`
+				CREATE TABLE IF NOT EXISTS consultations (
+					id INTEGER PRIMARY KEY AUTOINCREMENT,
+					name TEXT NOT NULL,
+					country_code TEXT NOT NULL,
+					phone TEXT NOT NULL,
+					email TEXT,
+					service TEXT,
+					created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+				)
+			`).run();
+			await env.DB.prepare(
+				"INSERT INTO consultations (name, country_code, phone, email, service) VALUES (?, ?, ?, ?, ?)",
+			).bind(name, countryCode, phone, email || null, service || null).run();
+			return withSecurityHeaders(Response.json({ message: "Consultation request received." }, { status: 201 }));
+		}
+
 		const response = await env.ASSETS.fetch(request);
 
 		const lastPathSegment = url.pathname.split("/").pop() || "";

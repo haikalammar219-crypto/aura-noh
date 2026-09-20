@@ -205,7 +205,12 @@ const translations = {
     'إرسال التقييم': 'Submit Review', 'التقييمات ستظهر هنا قريبًا.': 'Reviews will appear here soon.',
     'جارٍ إرسال تقييمك...': 'Submitting your review...',
     'شكرًا لك. تم استلام تقييمك وسيظهر بعد المراجعة.': 'Thank you. Your review was received and will appear after approval.',
-    'حدث خطأ، حاول مرة أخرى.': 'Something went wrong. Please try again.'
+    'حدث خطأ، حاول مرة أخرى.': 'Something went wrong. Please try again.',
+    'استشارة مجانية': 'Free Consultation', 'اطلب استشارتك المجانية': 'Request Your Free Consultation',
+    'دعنا نتواصل معك': 'Let us contact you', 'أرسل بياناتك وسيتواصل معك فريق AURA لمناقشة احتياجك وتقديم التوجيه المناسب.': 'Send your details and the AURA team will contact you to discuss your needs and provide suitable guidance.',
+    'مفتاح الدولة': 'Country code', 'رقم الهاتف': 'Phone number', 'نوع الاستشارة': 'Consultation type', 'اختر نوع الاستشارة': 'Choose a consultation type',
+    'استشارة عامة': 'General consultation', 'أوافق على التواصل معي بخصوص طلب الاستشارة.': 'I agree to be contacted about my consultation request.',
+    'إرسال طلب الاستشارة': 'Send consultation request'
 };
 
 const reverseTranslations = Object.fromEntries(Object.entries(translations).map(([arabic, english]) => [english, arabic]));
@@ -431,6 +436,7 @@ const sharedLocalCopy = {
 Object.entries(sharedLocalCopy).forEach(([language, values]) => Object.assign(localLanguagePacks[language] || (localLanguagePacks[language] = {}), values));
 
 Object.assign(localLanguagePacks.tr, {
+    'الاسم': 'Ad', 'اكتب اسمك': 'Adınızı yazın', 'البريد الإلكتروني': 'E-posta',
     'عن الشركة': 'Şirket hakkında',
     'مجالات العمل': 'Çalışma alanları',
     'التواصل': 'İletişim',
@@ -559,6 +565,29 @@ Object.assign(localLanguagePacks.fr, {
     'تجارب تُلهم ثقة جديدة': 'Des expériences qui inspirent une nouvelle confiance', 'نحن بانتظار أولى تجاربكم معنا.': 'Nous attendons avec plaisir votre première expérience avec nous.', 'شاركنا رأيك': 'Partagez votre expérience', 'رأيك يساعدنا على تقديم تجربة أفضل.': 'Votre avis nous aide à offrir une meilleure expérience.',
     'الاسم': 'Nom', 'التقييم': 'Évaluation', 'رسالتك': 'Votre message', 'إرسال التقييم': 'Envoyer l’avis', 'اختر تقييمك': 'Choisissez votre évaluation', 'كيف كانت تجربتك معنا؟': 'Comment était votre expérience avec nous ?', 'التقييمات ستظهر هنا قريبًا.': 'Les avis apparaîtront bientôt.',
     'جميع الحقوق محفوظة.': 'Tous droits réservés.'
+});
+
+Object.assign(localLanguagePacks.tr, {
+    'استشارة مجانية': 'Ücretsiz danışmanlık', 'اطلب استشارتك المجانية': 'Ücretsiz danışmanlığınızı isteyin', 'دعنا نتواصل معك': 'Sizinle iletişime geçelim',
+    'أرسل بياناتك وسيتواصل معك فريق AURA لمناقشة احتياجك وتقديم التوجيه المناسب.': 'Bilgilerinizi gönderin; AURA ekibi ihtiyaçlarınızı görüşmek ve uygun yönlendirmeyi sunmak için sizinle iletişime geçsin.',
+    'مفتاح الدولة': 'Ülke kodu', 'رقم الهاتف': 'Telefon numarası', 'نوع الاستشارة': 'Danışmanlık türü', 'اختر نوع الاستشارة': 'Danışmanlık türünü seçin',
+    'استشارة عامة': 'Genel danışmanlık', 'أوافق على التواصل معي بخصوص طلب الاستشارة.': 'Danışmanlık talebim hakkında benimle iletişime geçilmesini kabul ediyorum.', 'إرسال طلب الاستشارة': 'Danışmanlık talebi gönder'
+});
+
+Object.assign(localLanguagePacks.pt, {
+    'الاسم': 'Nome', 'اكتب اسمك': 'Digite seu nome', 'البريد الإلكتروني': 'E-mail',
+    'استشارة مجانية': 'Consulta gratuita', 'اطلب استشارتك المجانية': 'Solicite sua consulta gratuita', 'دعنا نتواصل معك': 'Fale conosco',
+    'أرسل بياناتك وسيتواصل معك فريق AURA لمناقشة احتياجك وتقديم التوجيه المناسب.': 'Envie seus dados e a equipe AURA entrará em contato para entender sua necessidade e oferecer a orientação adequada.',
+    'مفتاح الدولة': 'Código do país', 'رقم الهاتف': 'Número de telefone', 'نوع الاستشارة': 'Tipo de consulta', 'اختر نوع الاستشارة': 'Escolha o tipo de consulta',
+    'استشارة عامة': 'Consulta geral', 'أوافق على التواصل معي بخصوص طلب الاستشارة.': 'Concordo em ser contatado sobre meu pedido de consulta.', 'إرسال طلب الاستشارة': 'Enviar pedido de consulta'
+});
+
+Object.assign(localLanguagePacks.hi, {
+    'الاسم': 'नाम', 'اكتب اسمك': 'अपना नाम लिखें', 'البريد الإلكتروني': 'ईमेल',
+    'استشارة مجانية': 'निःशुल्क परामर्श', 'اطلب استشارتك المجانية': 'अपना निःशुल्क परामर्श प्राप्त करें', 'دعنا نتواصل معك': 'हम आपसे संपर्क करेंगे',
+    'أرسل بياناتك وسيتواصل معك فريق AURA لمناقشة احتياجك وتقديم التوجيه المناسب.': 'अपनी जानकारी भेजें और AURA टीम आपकी आवश्यकता पर चर्चा करने तथा उचित मार्गदर्शन देने के लिए आपसे संपर्क करेगी।',
+    'مفتاح الدولة': 'देश कोड', 'رقم الهاتف': 'फोन नंबर', 'نوع الاستشارة': 'परामर्श का प्रकार', 'اختر نوع الاستشارة': 'परामर्श का प्रकार चुनें',
+    'استشارة عامة': 'सामान्य परामर्श', 'أوافق على التواصل معي بخصوص طلب الاستشارة.': 'मैं अपने परामर्श अनुरोध के संबंध में संपर्क किए जाने के लिए सहमत हूं।', 'إرسال طلب الاستشارة': 'परामर्श अनुरोध भेजें'
 });
 
 function setupLanguageMenu() {
@@ -822,4 +851,50 @@ if (reviewForm) {
         }
     });
     loadReviews();
+}
+
+const consultationForm = document.getElementById('consultation-form');
+const consultationStatus = document.getElementById('consultation-status');
+const consultationMessages = {
+    ar: { success: 'تم استلام طلبك، وسيتم التواصل معك قريبًا.', error: 'تعذر إرسال الطلب. حاول مرة أخرى.' },
+    en: { success: 'Your request was received. We will contact you soon.', error: 'Your request could not be sent. Please try again.' },
+    tr: { success: 'Talebiniz alındı. Yakında sizinle iletişime geçeceğiz.', error: 'Talep gönderilemedi. Lütfen tekrar deneyin.' },
+    pt: { success: 'Seu pedido foi recebido. Entraremos em contato em breve.', error: 'Não foi possível enviar o pedido. Tente novamente.' },
+    hi: { success: 'आपका अनुरोध प्राप्त हो गया है। हम जल्द ही आपसे संपर्क करेंगे।', error: 'अनुरोध भेजा नहीं जा सका। कृपया पुनः प्रयास करें।' }
+};
+
+if (consultationForm) {
+    consultationForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        const submitButton = consultationForm.querySelector('button[type="submit"]');
+        const formData = new FormData(consultationForm);
+        const language = document.documentElement.lang || 'ar';
+        const messages = consultationMessages[language] || consultationMessages.en;
+        submitButton.disabled = true;
+        consultationStatus.textContent = '';
+
+        try {
+            const response = await fetch('/api/consultations', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.get('name'),
+                    countryCode: formData.get('countryCode'),
+                    phone: formData.get('phone'),
+                    email: formData.get('email'),
+                    service: formData.get('service'),
+                    consent: formData.get('consent') === 'on',
+                    website: formData.get('website')
+                })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || messages.error);
+            consultationForm.reset();
+            consultationStatus.textContent = messages.success;
+        } catch (error) {
+            consultationStatus.textContent = error.message || messages.error;
+        } finally {
+            submitButton.disabled = false;
+        }
+    });
 }

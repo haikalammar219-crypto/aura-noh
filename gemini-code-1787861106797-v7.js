@@ -311,7 +311,21 @@ function setupLanguageMenu() {
         option.setAttribute('aria-selected', String(code === current));
         option.addEventListener('click', () => {
             localStorage.setItem('aura-language', code);
-            document.cookie = code === 'ar' ? 'googtrans=; Max-Age=0; path=/' : `googtrans=/ar/${code}; path=/`;
+            const clearCookie = `${'googtrans'}=; Max-Age=0; path=/`;
+            document.cookie = clearCookie;
+            document.cookie = `${'googtrans'}=; Max-Age=0; path=/; domain=${location.hostname}`;
+            if (code === 'ar') {
+                window.location.reload();
+                return;
+            }
+            const combo = document.querySelector('.goog-te-combo');
+            if (combo) {
+                combo.value = code;
+                combo.dispatchEvent(new Event('change'));
+                return;
+            }
+            document.cookie = `googtrans=/ar/${code}; path=/`;
+            document.cookie = `googtrans=/ar/${code}; path=/; domain=${location.hostname}`;
             window.location.reload();
         });
         return option;

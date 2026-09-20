@@ -493,6 +493,24 @@ Object.assign(localLanguagePacks.hi || (localLanguagePacks.hi = {}), {
     'تواصل مع فريقنا': 'हमारी टीम से संपर्क करें', 'معلومات الاتصال الرسمية': 'आधिकारिक संपर्क जानकारी', 'يسعدنا الإجابة على جميع استفساراتكم وبناء شراكات جديدة.': 'हम आपके प्रश्नों का उत्तर देने और नई साझेदारियां बनाने में प्रसन्न हैं।', 'البريد الإلكتروني': 'ईमेल', 'رقم الهاتف (الإمارات)': 'फोन नंबर (यूएई)', 'المقر الرئيسي': 'मुख्यालय', 'سجل الشركة': 'कंपनी पंजीकरण', 'الاسم المسجل': 'पंजीकृत नाम', 'الحالة القانونية': 'कानूनी स्थिति', 'جميع الحقوق محفوظة.': 'सर्वाधिकार सुरक्षित।'
 });
 
+Object.assign(localLanguagePacks.es, {
+    'حلول إستراتيجية وتجارية متكاملة بأسلوب': 'Soluciones estratégicas y comerciales integradas con un estilo', 'عصري وفاخر': 'moderno y lujoso', 'استكشف خدماتنا': 'Explora nuestros servicios', 'تعرّف علينا': 'Sobre nosotros',
+    'تواصل مع فريقنا': 'Contacta con nuestro equipo', 'معلومات الاتصال الرسمية': 'Información oficial de contacto', 'يسعدنا الإجابة على جميع استفساراتكم وبناء شراكات جديدة.': 'Nos complace responder a sus preguntas y construir nuevas alianzas.',
+    'سجل الشركة': 'Registro de la empresa', 'معلومات الترخيص الرسمي للشركة:': 'Información oficial de la licencia de la empresa', 'الاسم المسجل': 'Nombre registrado', 'الحالة القانونية': 'Situación legal', 'البريد الإلكتروني': 'Correo electrónico', 'رقم الهاتف (الإمارات)': 'Teléfono (EAU)', 'المقر الرئيسي': 'Sede central'
+});
+
+Object.assign(localLanguagePacks.ur, {
+    'حلول إستراتيجية وتجارية متكاملة بأسلوب': 'جدید اور شاندار انداز میں', 'عصري وفاخر': 'مربوط اسٹریٹجک اور تجارتی حل', 'استكشف خدماتنا': 'ہماری خدمات دیکھیں', 'تعرّف علينا': 'ہمارے بارے میں',
+    'تواصل مع فريقنا': 'ہماری ٹیم سے رابطہ کریں', 'معلومات الاتصال الرسمية': 'سرکاری رابطے کی معلومات', 'يسعدنا الإجابة على جميع استفساراتكم وبناء شراكات جديدة.': 'ہم آپ کے سوالات کے جواب دینے اور نئی شراکت داریاں بنانے میں خوش ہیں۔',
+    'سجل الشركة': 'کمپنی کا اندراج', 'معلومات الترخيص الرسمي للشركة:': 'کمپنی کے سرکاری لائسنس کی معلومات', 'الاسم المسجل': 'رجسٹرڈ نام', 'الحالة القانونية': 'قانونی حیثیت', 'البريد الإلكتروني': 'ای میل', 'رقم الهاتف (الإمارات)': 'فون نمبر (متحدہ عرب امارات)', 'المقر الرئيسي': 'مرکزی دفتر'
+});
+
+Object.assign(localLanguagePacks.fa, {
+    'حلول إستراتيجية وتجارية متكاملة بأسلوب': 'راهکارهای یکپارچه راهبردی و تجاری با سبکی', 'عصري وفاخر': 'مدرن و لوکس', 'استكشف خدماتنا': 'خدمات ما را ببینید', 'تعرّف علينا': 'درباره ما',
+    'تواصل مع فريقنا': 'با تیم ما تماس بگیرید', 'معلومات الاتصال الرسمية': 'اطلاعات رسمی تماس', 'يسعدنا الإجابة على جميع استفساراتكم وبناء شراكات جديدة.': 'خوشحالیم که به پرسش‌های شما پاسخ دهیم و همکاری‌های جدید بسازیم.',
+    'سجل الشركة': 'ثبت شرکت', 'معلومات الترخيص الرسمي للشركة:': 'اطلاعات رسمی مجوز شرکت', 'الاسم المسجل': 'نام ثبت‌شده', 'الحالة القانونية': 'وضعیت حقوقی', 'البريد الإلكتروني': 'ایمیل', 'رقم الهاتف (الإمارات)': 'شماره تلفن (امارات)', 'المقر الرئيسي': 'دفتر مرکزی'
+});
+
 const remainingPageCopy = {
     de: {
         'حلول إستراتيجية وتجارية متكاملة بأسلوب': 'Integrierte strategische und kommerzielle Lösungen in einem', 'عصري وفاخر': 'modernen und luxuriösen Stil', 'استكشف خدماتنا': 'Unsere Dienstleistungen entdecken', 'تعرّف علينا': 'Über uns', 'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'Wir sind ein führendes Unternehmen in den VAE und unterstützen Unternehmen bei Wachstum und Expansion nach den neuesten globalen Standards.', 'تجارب تُلهم ثقة جديدة': 'Erfahrungen, die neues Vertrauen schaffen', 'نحن بانتظار أولى تجاربكم معنا.': 'Wir freuen uns auf Ihre erste Erfahrung mit uns.', 'شاركنا رأيك': 'Teilen Sie Ihre Erfahrung', 'رأيك يساعدنا على تقديم تجربة أفضل.': 'Ihr Feedback hilft uns, ein besseres Erlebnis zu schaffen.', 'معلومات الاتصال الرسمية': 'Offizielle Kontaktinformationen', 'يسعدنا الإجابة على جميع استفساراتكم وبناء شراكات جديدة.': 'Wir beantworten gerne Ihre Fragen und bauen neue Partnerschaften auf.', 'البريد الإلكتروني': 'E-Mail', 'رقم الهاتف (الإمارات)': 'Telefon (VAE)', 'المقر الرئيسي': 'Hauptsitz', 'سجل الشركة': 'Unternehmensregister', 'معلومات الترخيص الرسمي للشركة:': 'Offizielle Lizenzinformationen des Unternehmens', 'الاسم المسجل': 'Eingetragener Name', 'الحالة القانونية': 'Rechtsstatus', 'جميع الحقوق محفوظة.': 'Alle Rechte vorbehalten.', 'التقييمات ستظهر هنا قريبًا.': 'Bewertungen werden bald angezeigt.', 'إرسال التقييم': 'Bewertung senden', 'اختر تقييمك': 'Bewertung auswählen', 'كيف كانت تجربتك معنا؟': 'Wie war Ihre Erfahrung mit uns?'

@@ -18,7 +18,7 @@ export default {
 		const sendBrevoEmail = async ({ to, subject, text, replyTo }) => {
 			if (!env.BREVO_API_KEY) return false;
 			const payload = {
-				sender: { email: env.BREVO_FROM_EMAIL || "ammar.h@auraenter.com", name: "AURA ENTERPRISE" },
+				sender: { email: env.BREVO_FROM_EMAIL || "no-reply@auraenter.com", name: "AURA ENTERPRISE" },
 				to: [{ email: to }],
 				subject,
 				textContent: text,

@@ -211,7 +211,11 @@ const translations = {
 const reverseTranslations = Object.fromEntries(Object.entries(translations).map(([arabic, english]) => [english, arabic]));
 
 function translateText(language) {
-    const dictionary = language === 'ar' ? reverseTranslations : (language === 'en' ? translations : (localLanguagePacks[language] || translations));
+    const dictionary = language === 'ar'
+        ? reverseTranslations
+        : language === 'en'
+            ? translations
+            : { ...translations, ...(localLanguagePacks[language] || {}) };
     const translateValue = value => dictionary[value] || value;
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     const textNodes = [];
@@ -352,12 +356,6 @@ function setupLanguageMenu() {
             menu.classList.remove('is-open');
             toggle.setAttribute('aria-expanded', 'false');
             localStorage.setItem('aura-language', code);
-            document.cookie = 'googtrans=; Max-Age=0; path=/';
-            document.cookie = `googtrans=; Max-Age=0; path=/; domain=${location.hostname}`;
-            if (code !== 'ar' && code !== 'en') {
-                document.cookie = `googtrans=/ar/${code}; path=/`;
-                document.cookie = `googtrans=/ar/${code}; path=/; domain=${location.hostname}`;
-            }
             window.location.reload();
         });
         return option;
@@ -372,24 +370,6 @@ function setupLanguageMenu() {
             toggle.setAttribute('aria-expanded', 'false');
         }
     });
-
-    if (current !== 'ar' && current !== 'en') {
-        window.googleTranslateElementInit = () => {
-            if (!window.google?.translate || document.getElementById('google_translate_element')) return;
-            const host = document.createElement('div');
-            host.id = 'google_translate_element';
-            document.body.appendChild(host);
-            new window.google.translate.TranslateElement({
-                pageLanguage: 'ar',
-                includedLanguages: 'en,es,ur,fa,zh-CN,fr,de,hi,pt,tr',
-                autoDisplay: false
-            }, 'google_translate_element');
-        };
-        const script = document.createElement('script');
-        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-        script.async = true;
-        document.head.appendChild(script);
-    }
 
 }
 

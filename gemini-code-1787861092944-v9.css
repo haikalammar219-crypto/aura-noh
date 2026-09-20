@@ -343,6 +343,12 @@ iframe.goog-te-banner-frame {
     height: 0 !important;
     visibility: hidden !important;
 }
+
+iframe.skiptranslate {
+    display: none !important;
+    height: 0 !important;
+    visibility: hidden !important;
+}
 body { top: 0 !important; }
 
 /* Hero Section */

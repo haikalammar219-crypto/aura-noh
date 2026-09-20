@@ -211,7 +211,7 @@ const translations = {
 const reverseTranslations = Object.fromEntries(Object.entries(translations).map(([arabic, english]) => [english, arabic]));
 
 function translateText(language) {
-    const dictionary = language === 'en' ? translations : reverseTranslations;
+    const dictionary = language === 'ar' ? reverseTranslations : (language === 'en' ? translations : (localLanguagePacks[language] || translations));
     const translateValue = value => dictionary[value] || value;
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     const textNodes = [];
@@ -230,7 +230,7 @@ function translateText(language) {
         });
     });
     document.documentElement.lang = language;
-    document.documentElement.dir = language === 'en' ? 'ltr' : 'rtl';
+    document.documentElement.dir = ['ar', 'ur', 'fa'].includes(language) ? 'rtl' : 'ltr';
     const pageTitles = {
         'Main-v6.html': ['AURA ENTERPRISE FZE LLC | الموقع الرسمي', 'AURA ENTERPRISE FZE LLC | Official Website'],
         'about.html': ['عن الشركة | AURA ENTERPRISE FZE LLC', 'About the Company | AURA ENTERPRISE FZE LLC'],
@@ -289,9 +289,48 @@ function updateReviewLanguage(language) {
 }
 
 const languageOptions = [
-    ['ar', 'العربية'], ['en', 'English'], ['es', 'Español'], ['ur', 'اردو'], ['zh-CN', '中文'],
+    ['ar', 'العربية'], ['en', 'English'], ['es', 'Español'], ['ur', 'اردو'], ['fa', 'فارسی'], ['zh-CN', '中文'],
     ['fr', 'Français'], ['de', 'Deutsch'], ['hi', 'हिन्दी'], ['pt', 'Português'], ['tr', 'Türkçe']
 ];
+
+const localLanguagePacks = {
+    es: {
+        'عن الشركة': 'Acerca de la empresa', 'مجالات العمل': 'Áreas de trabajo', 'التواصل': 'Contacto', 'تواصل معنا': 'Contáctanos', 'آراء العملاء': 'Opiniones de los clientes',
+        'من نحن': 'Quiénes somos', 'رؤيتنا': 'Nuestra visión', 'مهمتنا': 'Nuestra misión', 'قيمنا': 'Nuestros valores', 'مجالات التميز': 'Áreas de excelencia', 'مباشرة التواصل': 'Ponte en contacto',
+        'خدماتنا الاستراتيجية': 'Nuestros servicios estratégicos', 'التجارة والاستثمار والوساطة التجارية': 'Comercio, inversión y corretaje comercial', 'الاستيراد والتصدير والتجارة العامة': 'Importación, exportación y comercio general', 'التسويق الإلكتروني': 'Agencia de marketing digital',
+        'شبكة أعمالنا': 'Nuestra red empresarial', 'حضور تجاري يتجاوز الحدود': 'Presencia comercial sin fronteras', 'شراكة': 'Asociación', 'عالمية المستوى': 'Nivel mundial', 'استيراد وتصدير': 'Importación y exportación', 'لوجستيات': 'Logística', 'تجارة': 'Comercio',
+        'تواصل مع فريقنا': 'Contacta con nuestro equipo', 'شاركنا رأيك': 'Comparte tu experiencia', 'الاسم': 'Nombre', 'التقييم': 'Valoración', 'رسالتك': 'Tu mensaje', 'إرسال التقييم': 'Enviar opinión'
+    },
+    fr: {
+        'عن الشركة': "À propos de l'entreprise", 'مجالات العمل': "Domaines d'activité", 'التواصل': 'Contact', 'تواصل معنا': 'Contactez-nous', 'آراء العملاء': 'Avis clients',
+        'من نحن': 'Qui sommes-nous', 'رؤيتنا': 'Notre vision', 'مهمتنا': 'Notre mission', 'قيمنا': 'Nos valeurs', 'مجالات التميز': "Domaines d'excellence", 'مباشرة التواصل': 'Contactez-nous',
+        'خدماتنا الاستراتيجية': 'Nos services stratégiques', 'التجارة والاستثمار والوساطة التجارية': 'Commerce, investissement et courtage commercial', 'الاستيراد والتصدير والتجارة العامة': 'Importation, exportation et commerce général', 'التسويق الإلكتروني': 'Agence de marketing digital',
+        'شبكة أعمالنا': 'Notre réseau commercial', 'حضور تجاري يتجاوز الحدود': 'Une présence commerciale sans frontières', 'شراكة': 'Partenariat', 'عالمية المستوى': 'De niveau mondial', 'استيراد وتصدير': 'Import-export', 'لوجستيات': 'Logistique', 'تجارة': 'Commerce',
+        'تواصل مع فريقنا': 'Contactez notre équipe', 'شاركنا رأيك': 'Partagez votre expérience', 'الاسم': 'Nom', 'التقييم': 'Évaluation', 'رسالتك': 'Votre message', 'إرسال التقييم': 'Envoyer l’avis'
+    },
+    de: {
+        'عن الشركة': 'Über das Unternehmen', 'مجالات العمل': 'Arbeitsbereiche', 'التواصل': 'Kontakt', 'تواصل معنا': 'Kontaktieren Sie uns', 'آراء العملاء': 'Kundenbewertungen',
+        'من نحن': 'Wer sind wir', 'رؤيتنا': 'Unsere Vision', 'مهمتنا': 'Unsere Mission', 'قيمنا': 'Unsere Werte', 'مجالات التميز': 'Kompetenzbereiche', 'مباشرة التواصل': 'Kontakt aufnehmen',
+        'خدماتنا الاستراتيجية': 'Unsere strategischen Dienstleistungen', 'التجارة والاستثمار والوساطة التجارية': 'Handel, Investitionen und Handelsvermittlung', 'الاستيراد والتصدير والتجارة العامة': 'Import, Export und allgemeiner Handel', 'التسويق الإلكتروني': 'Digitalmarketing-Agentur',
+        'شبكة أعمالنا': 'Unser Geschäftsnetzwerk', 'حضور تجاري يتجاوز الحدود': 'Geschäftspräsenz ohne Grenzen', 'شراكة': 'Partnerschaft', 'عالمية المستوى': 'Weltklasse', 'استيراد وتصدير': 'Import und Export', 'لوجستيات': 'Logistik', 'تجارة': 'Handel',
+        'تواصل مع فريقنا': 'Kontaktieren Sie unser Team', 'شاركنا رأيك': 'Teilen Sie Ihre Erfahrung', 'الاسم': 'Name', 'التقييم': 'Bewertung', 'رسالتك': 'Ihre Nachricht', 'إرسال التقييم': 'Bewertung senden'
+    },
+    'zh-CN': {
+        'عن الشركة': '关于公司', 'مجالات العمل': '业务领域', 'التواصل': '联系我们', 'تواصل معنا': '联系我们', 'آراء العملاء': '客户评价', 'من نحن': '关于我们', 'رؤيتنا': '我们的愿景', 'مهمتنا': '我们的使命', 'قيمنا': '我们的价值观',
+        'مجالات التميز': '优势领域', 'مباشرة التواصل': '立即联系', 'خدماتنا الاستراتيجية': '我们的战略服务', 'التجارة والاستثمار والوساطة التجارية': '贸易、投资与商业经纪', 'الاستيراد والتصدير والتجارة العامة': '进出口与一般贸易', 'التسويق الإلكتروني': '数字营销机构',
+        'شبكة أعمالنا': '我们的商业网络', 'حضور تجاري يتجاوز الحدود': '跨越边界的商业影响力', 'شراكة': '合作伙伴关系', 'عالمية المستوى': '世界级', 'استيراد وتصدير': '进出口', 'لوجستيات': '物流', 'تجارة': '贸易', 'تواصل مع فريقنا': '联系我们的团队', 'شاركنا رأيك': '分享您的体验', 'الاسم': '姓名', 'التقييم': '评价', 'رسالتك': '您的留言', 'إرسال التقييم': '提交评价'
+    },
+    ur: {
+        'عن الشركة': 'کمپنی کا تعارف', 'مجالات العمل': 'کام کے شعبے', 'التواصل': 'رابطہ', 'تواصل معنا': 'ہم سے رابطہ کریں', 'آراء العملاء': 'صارفین کی آراء', 'من نحن': 'ہم کون ہیں', 'رؤيتنا': 'ہماری بصیرت', 'مهمتنا': 'ہمارا مشن', 'قيمنا': 'ہماری اقدار',
+        'مجالات التميز': 'نمایاں شعبے', 'مباشرة التواصل': 'رابطہ کریں', 'خدماتنا الاستراتيجية': 'ہماری اسٹریٹجک خدمات', 'التجارة والاستثمار والوساطة التجارية': 'تجارت، سرمایہ کاری اور تجارتی بروکریج', 'الاستيراد والتصدير والتجارة العامة': 'درآمد، برآمد اور عمومی تجارت', 'التسويق الإلكتروني': 'ڈیجیٹل مارکیٹنگ ایجنسی',
+        'شبكة أعمالنا': 'ہمارا کاروباری نیٹ ورک', 'حضور تجاري يتجاوز الحدود': 'سرحدوں سے آگے کاروباری موجودگی', 'شراكة': 'شراکت داری', 'عالمية المستوى': 'عالمی معیار', 'استيراد وتصدير': 'درآمد و برآمد', 'لوجستيات': 'لاجسٹکس', 'تجارة': 'تجارت', 'تواصل مع فريقنا': 'ہماری ٹیم سے رابطہ کریں', 'شاركنا رأيك': 'اپنا تجربہ شیئر کریں', 'الاسم': 'نام', 'التقييم': 'درجہ بندی', 'رسالتك': 'آپ کا پیغام', 'إرسال التقييم': 'جائزہ بھیجیں'
+    },
+    fa: {
+        'عن الشركة': 'درباره شرکت', 'مجالات العمل': 'حوزه‌های فعالیت', 'التواصل': 'تماس با ما', 'تواصل معنا': 'با ما تماس بگیرید', 'آراء العملاء': 'نظرات مشتریان', 'من نحن': 'درباره ما', 'رؤيتنا': 'چشم‌انداز ما', 'مهمتنا': 'ماموریت ما', 'قيمنا': 'ارزش‌های ما',
+        'مجالات التميز': 'حوزه‌های برتری', 'مباشرة التواصل': 'تماس مستقیم', 'خدماتنا الاستراتيجية': 'خدمات راهبردی ما', 'التجارة والاستثمار والوساطة التجارية': 'تجارت، سرمایه‌گذاری و کارگزاری تجاری', 'الاستيراد والتصدير والتجارة العامة': 'واردات، صادرات و تجارت عمومی', 'التسويق الإلكتروني': 'آژانس بازاریابی دیجیتال',
+        'شبكة أعمالنا': 'شبکه تجاری ما', 'حضور تجاري يتجاوز الحدود': 'حضور تجاری فراتر از مرزها', 'شراكة': 'مشارکت', 'عالمية المستوى': 'در سطح جهانی', 'استيراد وتصدير': 'واردات و صادرات', 'لوجستيات': 'لجستیک', 'تجارة': 'تجارت', 'تواصل مع فريقنا': 'با تیم ما تماس بگیرید', 'شاركنا رأيك': 'تجربه خود را به اشتراک بگذارید', 'الاسم': 'نام', 'التقييم': 'امتیازدهی', 'رسالتك': 'پیام شما', 'إرسال التقييم': 'ارسال نظر'
+    }
+};
 
 function setupLanguageMenu() {
     const menu = document.getElementById('language-menu');
@@ -343,32 +382,12 @@ function setupLanguageMenu() {
         }
     });
 
-    if (current === 'ar' || current === 'en') return;
-
-    window.googleTranslateElementInit = () => {
-        if (!window.google?.translate || document.getElementById('google_translate_element')) return;
-        const host = document.createElement('div');
-        host.id = 'google_translate_element';
-        document.body.appendChild(host);
-        new window.google.translate.TranslateElement({
-            pageLanguage: 'ar',
-            includedLanguages: 'en,es,ur,zh-CN,fr,de,hi,pt,tr',
-            autoDisplay: false
-        }, 'google_translate_element');
-    };
-    const script = document.createElement('script');
-    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    script.async = true;
-    document.head.appendChild(script);
 }
 
 setupLanguageMenu();
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
-if (savedLanguage === 'ar' || savedLanguage === 'en') translateText(savedLanguage);
-else {
-    document.documentElement.lang = savedLanguage;
-    document.documentElement.dir = savedLanguage === 'ur' ? 'rtl' : 'ltr';
-}
+translateText(savedLanguage);
+document.cookie = 'googtrans=; Max-Age=0; path=/';
 setupWarpText();
 
 const currentPage = window.location.pathname.split('/').pop() || 'Main-v6.html';

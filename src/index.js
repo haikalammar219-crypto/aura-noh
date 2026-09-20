@@ -155,7 +155,7 @@ export default {
 			).bind(name, countryCode, phone, email || null, service || null).run();
 
 			const ownerEmail = env.CONSULTATION_OWNER_EMAIL || "ammar.h@auraenter.com";
-			const subject = language === "ar" ? "طلب استشارة مجانية جديد" : "New free consultation request";
+			const subject = "New free consultation request";
 			const ownerText = [
 				"AURA ENTERPRISE - Consultation request",
 				`Name: ${name}`,
@@ -167,10 +167,8 @@ export default {
 				sendBrevoEmail({ to: ownerEmail, subject, text: ownerText, replyTo: email || ownerEmail }),
 				email ? sendBrevoEmail({
 					to: email,
-					subject: language === "ar" ? "تم استلام طلب الاستشارة" : "Your consultation request was received",
-					text: language === "ar"
-						? "تم استلام طلب الاستشارة الخاص بك بنجاح. سيتم التواصل معك قريبًا من فريق AURA ENTERPRISE. هذا بريد تلقائي، يرجى عدم الرد عليه."
-						: "Your consultation request was received successfully. The AURA ENTERPRISE team will contact you soon. This is an automated email; please do not reply.",
+					subject: "Your consultation request was received",
+					text: "Your consultation request was received successfully. The AURA ENTERPRISE team will contact you soon. This is an automated email; please do not reply.\n\nThank you for choosing AURA ENTERPRISE.",
 				}) : Promise.resolve(false),
 			]);
 			return withSecurityHeaders(Response.json({ message: "Consultation request received." }, { status: 201 }));

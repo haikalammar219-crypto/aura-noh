@@ -431,6 +431,12 @@ const sharedLocalCopy = {
 Object.entries(sharedLocalCopy).forEach(([language, values]) => Object.assign(localLanguagePacks[language] || (localLanguagePacks[language] = {}), values));
 
 Object.assign(localLanguagePacks.tr, {
+    'عن الشركة': 'Şirket hakkında',
+    'مجالات العمل': 'Çalışma alanları',
+    'التواصل': 'İletişim',
+    'تواصل معنا': 'Bize ulaşın',
+    'آراء العملاء': 'Müşteri yorumları',
+    'اللغة': 'Dil',
     'حلول إستراتيجية وتجارية متكاملة بأسلوب': 'Modern ve lüks bir tarzda',
     'عصري وفاخر': 'entegre stratejik ve ticari çözümler',
     'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'Birleşik Arap Emirlikleri’nde kayıtlı lider bir şirket olarak işletmelerin en yeni küresel standartlara göre büyümesine ve genişlemesine yardımcı oluyoruz.',
@@ -470,6 +476,12 @@ Object.assign(localLanguagePacks.tr, {
 });
 
 Object.assign(localLanguagePacks.pt || (localLanguagePacks.pt = {}), {
+    'عن الشركة': 'Sobre a empresa',
+    'مجالات العمل': 'Áreas de atuação',
+    'التواصل': 'Contato',
+    'تواصل معنا': 'Fale conosco',
+    'آراء العملاء': 'Depoimentos',
+    'اللغة': 'Idioma',
     'حلول إستراتيجية وتجارية متكاملة بأسلوب': 'Soluções estratégicas e comerciais integradas em um estilo', 'عصري وفاخر': 'moderno e luxuoso',
     'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'Somos uma empresa líder registrada nos EAU, dedicada a ajudar negócios e empresas a crescer e expandir conforme os mais recentes padrões globais.', 'استكشف خدماتنا': 'Explore nossos serviços', 'تعرّف علينا': 'Sobre nós',
     'من نحن': 'Sobre nós', 'رؤيتنا': 'Nossa visão', 'مهمتنا': 'Nossa missão', 'قيمنا': 'Nossos valores', 'مجالات التميز': 'Áreas de excelência', 'خدماتنا الاستراتيجية': 'Nossos serviços estratégicos',
@@ -478,7 +490,7 @@ Object.assign(localLanguagePacks.pt || (localLanguagePacks.pt = {}), {
     'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'Oferecer serviços e soluções de nível mundial para ajudar nossos parceiros a alcançar desempenho, sustentabilidade e rentabilidade máximos.',
     'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': 'Transparência, qualidade total, compromisso com a excelência e relações duradouras com clientes e parceiros.',
     'ربط الشركات بالفرص والشركاء المناسبين، وتسهيل الصفقات التجارية والاستثمارية الموثوقة.': 'Conectar empresas às oportunidades e parceiros certos e facilitar negócios comerciais e de investimento confiáveis.', 'إدارة عمليات الاستيراد والتصدير والتجارة العامة عبر أسواق الإمارات والأسواق العالمية.': 'Gerir operações de importação, exportação e comércio geral nos mercados dos EAU e globais.', 'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': 'Soluções de marketing digital para pessoas e empresas construírem uma presença mais forte e alcançarem os clientes certos.',
-    'تواصل مع فريقنا': 'Contacte nossa equipe', 'معلومات الاتصال الرسمية': 'Informações oficiais de contato', 'يسعدنا الإجابة على جميع استفساراتكم وبناء شراكات جديدة.': 'Teremos prazer em responder às suas perguntas e construir novas parcerias.', 'البريد الإلكتروني': 'E-mail', 'رقم الهاتف (الإمارات)': 'Telefone (EAU)', 'المقر الرئيسي': 'Sede', 'سجل الشركة': 'Registro da empresa', 'الاسم المسجل': 'Nome registrado', 'الحالة القانونية': 'Situação jurídica', 'جميع الحقوق محفوظة.': 'Todos os direitos reservados.'
+    'تواصل مع فريقنا': 'Fale com nossa equipe', 'معلومات الاتصال الرسمية': 'Informações oficiais de contato', 'يسعدنا الإجابة على جميع استفساراتكم وبناء شراكات جديدة.': 'Teremos prazer em responder às suas perguntas e construir novas parcerias.', 'البريد الإلكتروني': 'E-mail', 'رقم الهاتف (الإمارات)': 'Telefone (EAU)', 'المقر الرئيسي': 'Sede', 'سجل الشركة': 'Registro da empresa', 'الاسم المسجل': 'Nome registrado', 'الحالة القانونية': 'Situação jurídica', 'جميع الحقوق محفوظة.': 'Todos os direitos reservados.'
 });
 
 Object.assign(localLanguagePacks.hi || (localLanguagePacks.hi = {}), {

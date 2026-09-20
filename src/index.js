@@ -134,6 +134,13 @@ export default {
 			const email = String(payload.email || "").trim().slice(0, 160);
 			const service = String(payload.service || "").trim().slice(0, 120);
 			const language = String(payload.language || "ar").trim().slice(0, 12);
+			const requestLocation = request.cf || {};
+			const ipAddress = request.headers.get("CF-Connecting-IP") || "Unavailable";
+			const visitorCountry = String(requestLocation.country || "").slice(0, 80);
+			const visitorCity = String(requestLocation.city || "").slice(0, 120);
+			const visitorRegion = String(requestLocation.region || "").slice(0, 120);
+			const visitorLatitude = String(requestLocation.latitude || "").slice(0, 30);
+			const visitorLongitude = String(requestLocation.longitude || "").slice(0, 30);
 			const fullPhoneDigits = `${countryCode}${phone}`.replace(/\D/g, "");
 			if (!name || !/^\+[0-9]{1,15}$/.test(countryCode) || fullPhoneDigits.length < 8 || fullPhoneDigits.length > 15 || (email && !/^\S+@\S+\.\S+$/.test(email)) || payload.consent !== true) {
 				return withSecurityHeaders(Response.json({ error: "Please complete the required consultation fields." }, { status: 400 }));
@@ -150,9 +157,17 @@ export default {
 					created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 				)
 			`).run();
+			for (const column of [
+				"ip_address TEXT", "visitor_country TEXT", "visitor_city TEXT", "visitor_region TEXT",
+				"visitor_latitude TEXT", "visitor_longitude TEXT",
+			]) {
+				try {
+					await env.DB.prepare(`ALTER TABLE consultations ADD COLUMN ${column}`).run();
+				} catch {}
+			}
 			await env.DB.prepare(
-				"INSERT INTO consultations (name, country_code, phone, email, service) VALUES (?, ?, ?, ?, ?)",
-			).bind(name, countryCode, phone, email || null, service || null).run();
+				"INSERT INTO consultations (name, country_code, phone, email, service, ip_address, visitor_country, visitor_city, visitor_region, visitor_latitude, visitor_longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+			).bind(name, countryCode, phone, email || null, service || null, ipAddress, visitorCountry || null, visitorCity || null, visitorRegion || null, visitorLatitude || null, visitorLongitude || null).run();
 
 			const ownerEmail = env.CONSULTATION_OWNER_EMAIL || "ammar.h@auraenter.com";
 			const subject = "New free consultation request";
@@ -162,6 +177,9 @@ export default {
 				`Phone: ${countryCode} ${phone}`,
 				`Email: ${email || "Not provided"}`,
 				`Service: ${service || "General consultation"}`,
+				`IP address: ${ipAddress}`,
+				`Approximate location: ${[visitorCity, visitorRegion, visitorCountry].filter(Boolean).join(", ") || "Unavailable"}`,
+				`Coordinates: ${visitorLatitude && visitorLongitude ? `${visitorLatitude}, ${visitorLongitude}` : "Unavailable"}`,
 			].join("\n");
 			await Promise.allSettled([
 				sendBrevoEmail({ to: ownerEmail, subject, text: ownerText, replyTo: email || ownerEmail }),

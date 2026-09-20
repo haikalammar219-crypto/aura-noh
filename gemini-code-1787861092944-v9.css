@@ -338,8 +338,7 @@ nav a.active::after {
 #google_translate_element { display: none; }
 .goog-te-banner-frame,
 .goog-te-banner-frame.skiptranslate,
-iframe.goog-te-banner-frame,
-body > .skiptranslate {
+iframe.goog-te-banner-frame {
     display: none !important;
     height: 0 !important;
     visibility: hidden !important;

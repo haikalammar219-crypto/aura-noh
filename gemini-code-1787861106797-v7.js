@@ -454,6 +454,9 @@ const sharedLocalCopy = {
 Object.entries(sharedLocalCopy).forEach(([language, values]) => Object.assign(localLanguagePacks[language] || (localLanguagePacks[language] = {}), values));
 
 Object.assign(localLanguagePacks.tr, {
+    'شبكة أعمالنا': 'İş ağımız', 'حضور تجاري يتجاوز الحدود': 'Sınırların ötesinde ticari varlık', 'شراكة': 'Ortaklık', 'عالمية المستوى': 'Dünya standartlarında', 'استيراد وتصدير': 'İthalat ve ihracat', 'لوجستيات': 'Lojistik', 'تجارة': 'Ticaret',
+    'Partnership': 'Ortaklık', 'World-Class': 'Dünya standartlarında', 'Import & Export': 'İthalat ve ihracat', 'Logistics': 'Lojistik', 'Commerce': 'Ticaret',
+    'Our Business Network': 'İş ağımız', 'A Business Presence Beyond Borders': 'Sınırların ötesinde ticari varlık',
     'الاسم': 'Ad', 'اكتب اسمك': 'Adınızı yazın', 'البريد الإلكتروني': 'E-posta',
     'عن الشركة': 'Şirket hakkında',
     'مجالات العمل': 'Çalışma alanları',
@@ -593,6 +596,9 @@ Object.assign(localLanguagePacks.tr, {
 });
 
 Object.assign(localLanguagePacks.pt, {
+    'شبكة أعمالنا': 'Nossa rede empresarial', 'حضور تجاري يتجاوز الحدود': 'Uma presença comercial além das fronteiras', 'شراكة': 'Parceria', 'عالمية المستوى': 'Nível mundial', 'استيراد وتصدير': 'Importação e exportação', 'لوجستيات': 'Logística', 'تجارة': 'Comércio',
+    'Partnership': 'Parceria', 'World-Class': 'Nível mundial', 'Import & Export': 'Importação e exportação', 'Logistics': 'Logística', 'Commerce': 'Comércio',
+    'Our Business Network': 'Nossa rede empresarial', 'A Business Presence Beyond Borders': 'Uma presença comercial além das fronteiras',
     'الاسم': 'Nome', 'اكتب اسمك': 'Digite seu nome', 'البريد الإلكتروني': 'E-mail',
     'استشارة مجانية': 'Consulta gratuita', 'اطلب استشارتك المجانية': 'Solicite sua consulta gratuita', 'دعنا نتواصل معك': 'Fale conosco',
     'أرسل بياناتك وسيتواصل معك فريق AURA لمناقشة احتياجك وتقديم التوجيه المناسب.': 'Envie seus dados e a equipe AURA entrará em contato para entender sua necessidade e oferecer a orientação adequada.',
@@ -601,6 +607,9 @@ Object.assign(localLanguagePacks.pt, {
 });
 
 Object.assign(localLanguagePacks.hi, {
+    'شبكة أعمالنا': 'हमारा व्यावसायिक नेटवर्क', 'حضور تجاري يتجاوز الحدود': 'सीमाओं से परे व्यावसायिक उपस्थिति', 'شراكة': 'साझेदारी', 'عالمية المستوى': 'विश्व स्तरीय', 'استيراد وتصدير': 'आयात और निर्यात', 'لوجستيات': 'लॉजिस्टिक्स', 'تجارة': 'वाणिज्य',
+    'Partnership': 'साझेदारी', 'World-Class': 'विश्व स्तरीय', 'Import & Export': 'आयात और निर्यात', 'Logistics': 'लॉजिस्टिक्स', 'Commerce': 'वाणिज्य',
+    'Our Business Network': 'हमारा व्यावसायिक नेटवर्क', 'A Business Presence Beyond Borders': 'सीमाओं से परे व्यावसायिक उपस्थिति',
     'الاسم': 'नाम', 'اكتب اسمك': 'अपना नाम लिखें', 'البريد الإلكتروني': 'ईमेल',
     'استشارة مجانية': 'निःशुल्क परामर्श', 'اطلب استشارتك المجانية': 'अपना निःशुल्क परामर्श प्राप्त करें', 'دعنا نتواصل معك': 'हम आपसे संपर्क करेंगे',
     'أرسل بياناتك وسيتواصل معك فريق AURA لمناقشة احتياجك وتقديم التوجيه المناسب.': 'अपनी जानकारी भेजें और AURA टीम आपकी आवश्यकता पर चर्चा करने तथा उचित मार्गदर्शन देने के लिए आपसे संपर्क करेगी।',
@@ -648,6 +657,16 @@ const consultationLanguagePacks = {
 };
 
 Object.entries(consultationLanguagePacks).forEach(([language, values]) => Object.assign(localLanguagePacks[language] || (localLanguagePacks[language] = {}), values));
+
+const networkEnglishLabels = {
+    es: { 'Partnership': 'Asociación', 'World-Class': 'Nivel mundial', 'Import & Export': 'Importación y exportación', 'Logistics': 'Logística', 'Commerce': 'Comercio', 'Our Business Network': 'Nuestra red empresarial', 'A Business Presence Beyond Borders': 'Presencia comercial sin fronteras' },
+    fr: { 'Partnership': 'Partenariat', 'World-Class': 'De niveau mondial', 'Import & Export': 'Import-export', 'Logistics': 'Logistique', 'Commerce': 'Commerce', 'Our Business Network': 'Notre réseau commercial', 'A Business Presence Beyond Borders': 'Une présence commerciale sans frontières' },
+    de: { 'Partnership': 'Partnerschaft', 'World-Class': 'Weltklasse', 'Import & Export': 'Import und Export', 'Logistics': 'Logistik', 'Commerce': 'Handel', 'Our Business Network': 'Unser Geschäftsnetzwerk', 'A Business Presence Beyond Borders': 'Geschäftspräsenz ohne Grenzen' },
+    'zh-CN': { 'Partnership': '合作伙伴关系', 'World-Class': '世界级', 'Import & Export': '进出口', 'Logistics': '物流', 'Commerce': '贸易', 'Our Business Network': '我们的商业网络', 'A Business Presence Beyond Borders': '跨越边界的商业影响力' },
+    ur: { 'Partnership': 'شراکت داری', 'World-Class': 'عالمی معیار', 'Import & Export': 'درآمد و برآمد', 'Logistics': 'لاجسٹکس', 'Commerce': 'تجارت', 'Our Business Network': 'ہمارا کاروباری نیٹ ورک', 'A Business Presence Beyond Borders': 'سرحدوں سے آگے کاروباری موجودگی' },
+    fa: { 'Partnership': 'مشارکت', 'World-Class': 'در سطح جهانی', 'Import & Export': 'واردات و صادرات', 'Logistics': 'لجستیک', 'Commerce': 'تجارت', 'Our Business Network': 'شبکه تجاری ما', 'A Business Presence Beyond Borders': 'حضور تجاری فراتر از مرزها' }
+};
+Object.entries(networkEnglishLabels).forEach(([language, values]) => Object.assign(localLanguagePacks[language] || (localLanguagePacks[language] = {}), values));
 
 function setupCountryCallingCodes() {
     const select = document.getElementById('consultation-country');

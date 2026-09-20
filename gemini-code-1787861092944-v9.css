@@ -301,7 +301,12 @@ nav a.active::after {
     background: rgba(212, 175, 55, 0.12);
 }
 
-.language-menu { position: relative; }
+.language-menu {
+    left: 8%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
 .language-toggle { align-items: center; display: inline-flex; gap: 8px; }
 .language-toggle i { color: var(--accent-gold); }
 .language-options {
@@ -316,7 +321,8 @@ nav a.active::after {
     padding: 7px;
     pointer-events: none;
     position: absolute;
-    right: 0;
+    left: 0;
+    right: auto;
     top: calc(100% + 10px);
     transform: translateY(-6px);
     transition: opacity 180ms ease, transform 180ms ease;
@@ -1243,6 +1249,8 @@ footer {
         gap: 10px;
         padding: 12px 5%;
     }
+
+    .language-menu { left: 5%; }
 
     .aura-logo-image {
         height: 48px;

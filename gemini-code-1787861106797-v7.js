@@ -493,7 +493,13 @@ const reviewStatus = document.getElementById('review-status');
 const ratingPicker = document.getElementById('rating-picker');
 const ratingValue = document.getElementById('rating-value');
 const ratingTip = document.getElementById('rating-tip');
-const ratingLabels = { ar: ['ضعيف', 'مقبول', 'جيد', 'رائع', 'ممتاز'], en: ['Poor', 'Fair', 'Good', 'Great', 'Superb'] };
+const ratingLabels = {
+    ar: ['ضعيف', 'مقبول', 'جيد', 'رائع', 'ممتاز'], en: ['Poor', 'Fair', 'Good', 'Great', 'Superb'],
+    es: ['Mala', 'Regular', 'Buena', 'Muy buena', 'Excelente'], fr: ['Faible', 'Moyenne', 'Bonne', 'Très bonne', 'Excellente'],
+    de: ['Schwach', 'Mäßig', 'Gut', 'Sehr gut', 'Hervorragend'], 'zh-CN': ['差', '一般', '好', '很好', '极佳'],
+    ur: ['کمزور', 'مناسب', 'اچھا', 'بہت اچھا', 'بہترین'], fa: ['ضعیف', 'متوسط', 'خوب', 'عالی', 'عالی‌ترین'],
+    hi: ['खराब', 'ठीक', 'अच्छा', 'बहुत अच्छा', 'उत्कृष्ट'], pt: ['Fraca', 'Razoável', 'Boa', 'Muito boa', 'Excelente'], tr: ['Zayıf', 'Orta', 'İyi', 'Çok iyi', 'Mükemmel']
+};
 
 function paintRating(value, preview = false) {
     const stars = ratingPicker?.querySelectorAll('.peek-rating__star') || [];
@@ -516,7 +522,7 @@ function setRating(value, animate = true) {
     if (ratingValue) ratingValue.value = String(next);
     paintRating(next);
     if (ratingTip) {
-        const language = document.documentElement.lang === 'en' ? 'en' : 'ar';
+        const language = document.documentElement.lang || 'ar';
         ratingTip.textContent = next ? ratingLabels[language][next - 1] : '';
         ratingTip.dataset.show = String(next > 0);
     }
@@ -579,7 +585,7 @@ if (ratingPicker) {
         const value = Number(star.dataset.rating);
         star.addEventListener('pointerenter', () => {
             paintRating(value, true);
-            ratingTip.textContent = ratingLabels[document.documentElement.lang === 'en' ? 'en' : 'ar'][value - 1];
+            ratingTip.textContent = ratingLabels[document.documentElement.lang] ? ratingLabels[document.documentElement.lang][value - 1] : String(value);
             ratingTip.style.left = `${star.offsetLeft + star.offsetWidth / 2}px`;
             ratingTip.dataset.show = 'true';
         });

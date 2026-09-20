@@ -216,7 +216,7 @@ function translateText(language) {
         : language === 'en'
             ? translations
             : { ...translations, ...(localLanguagePacks[language] || {}) };
-    const translateValue = value => dictionary[value] || value;
+    const translateValue = value => dictionary[value] || translations[value] || value;
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     const textNodes = [];
     while (walker.nextNode()) textNodes.push(walker.currentNode);
@@ -335,6 +335,47 @@ const localLanguagePacks = {
         'شبكة أعمالنا': 'شبکه تجاری ما', 'حضور تجاري يتجاوز الحدود': 'حضور تجاری فراتر از مرزها', 'شراكة': 'مشارکت', 'عالمية المستوى': 'در سطح جهانی', 'استيراد وتصدير': 'واردات و صادرات', 'لوجستيات': 'لجستیک', 'تجارة': 'تجارت', 'تواصل مع فريقنا': 'با تیم ما تماس بگیرید', 'شاركنا رأيك': 'تجربه خود را به اشتراک بگذارید', 'الاسم': 'نام', 'التقييم': 'امتیازدهی', 'رسالتك': 'پیام شما', 'إرسال التقييم': 'ارسال نظر'
     }
 };
+
+const sharedLocalCopy = {
+    es: {
+        'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'Somos una empresa líder registrada en los EAU, dedicada a ayudar a las empresas a crecer y expandirse según los estándares mundiales más recientes.',
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط والعالم.': 'Ser el socio preferido de empresas e instituciones regionales e internacionales que buscan excelencia e innovación en los mercados de los EAU, Oriente Medio y el mundo.',
+        'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'Ofrecer servicios y soluciones de nivel mundial que ayuden a nuestros socios a alcanzar el máximo rendimiento, sostenibilidad y rentabilidad.',
+        'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': 'Transparencia, calidad total, compromiso con la excelencia y relaciones duraderas con nuestros clientes y socios.',
+        'ربط الشركات بالفرص والشركاء المناسبين، وتسهيل الصفقات التجارية والاستثمارية الموثوقة.': 'Conectar empresas con las oportunidades y socios adecuados y facilitar acuerdos comerciales y de inversión confiables.',
+        'إدارة عمليات الاستيراد والتصدير والتجارة العامة عبر أسواق الإمارات والأسواق العالمية.': 'Gestionar operaciones de importación, exportación y comercio general en los mercados de los EAU y del mundo.',
+        'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': 'Soluciones de marketing digital para personas y empresas que buscan una presencia más sólida y clientes adecuados.'
+    },
+    fr: {
+        'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'Nous sommes une entreprise leader enregistrée aux Émirats arabes unis, dédiée à la croissance et à l’expansion des entreprises selon les normes mondiales les plus récentes.',
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط والعالم.': 'Être le partenaire privilégié des entreprises et institutions régionales et internationales à la recherche d’excellence et d’innovation aux Émirats, au Moyen-Orient et dans le monde.',
+        'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'Fournir des services et solutions de niveau mondial permettant à nos partenaires d’atteindre les plus hauts niveaux de performance, de durabilité et de rentabilité.',
+        'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': 'Transparence, qualité totale, engagement envers l’excellence et relations durables avec nos clients et partenaires.',
+        'ربط الشركات بالفرص والشركاء المناسبين، وتسهيل الصفقات التجارية والاستثمارية الموثوقة.': 'Relier les entreprises aux bonnes opportunités et aux bons partenaires et faciliter des transactions commerciales et d’investissement fiables.',
+        'إدارة عمليات الاستيراد والتصدير والتجارة العامة عبر أسواق الإمارات والأسواق العالمية.': 'Gérer les opérations d’importation, d’exportation et de commerce général aux Émirats et sur les marchés mondiaux.',
+        'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': 'Des solutions de marketing numérique pour les particuliers et les entreprises afin de renforcer leur présence et d’atteindre les bons clients.'
+    },
+    'zh-CN': {
+        'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': '我们是一家在阿联酋注册的领先企业，致力于帮助企业按照最新的全球标准实现增长与扩张。',
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط والعالم.': '成为地区和国际企业及机构的首选合作伙伴，助力其在阿联酋、中东及全球市场追求卓越与创新。',
+        'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': '提供世界一流的服务与解决方案，帮助合作伙伴实现最高水平的绩效、可持续发展与盈利能力。',
+        'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': '透明、全面的质量、对卓越的承诺，以及与客户和合作伙伴建立长期关系。',
+        'ربط الشركات بالفرص والشركاء المناسبين، وتسهيل الصفقات التجارية والاستثمارية الموثوقة.': '为企业连接合适的机会与合作伙伴，促成可靠的商业与投资交易。',
+        'إدارة عمليات الاستيراد والتصدير والتجارة العامة عبر أسواق الإمارات والأسواق العالمية.': '管理阿联酋及全球市场的进出口和一般贸易业务。',
+        'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': '为个人和企业提供数字营销解决方案，打造更强的品牌影响力并触达合适客户。'
+    },
+    ur: {
+        'نحن شركة رائدة مسجلة في دولة الإمارات العربية المتحدة، نكرّس خبراتنا لمساعدة الأعمال والشركات على النمو والتوسّع وفق أحدث المعايير العالمية.': 'ہم متحدہ عرب امارات میں رجسٹرڈ ایک معروف کمپنی ہیں جو جدید عالمی معیار کے مطابق کاروباروں کی ترقی اور توسیع میں مدد کرتی ہے۔',
+        'أن نكون الشريك المفضل للشركات والمؤسسات الإقليمية والدولية الباحثة عن التميز والابتكار في سوق الإمارات والشرق الأوسط والعالم.': 'متحدہ عرب امارات، مشرق وسطیٰ اور عالمی منڈیوں میں عمدگی اور جدت کے خواہاں اداروں کے لیے پسندیدہ شراکت دار بننا۔',
+        'تقديم خدمات وحلول عالمية المستوى تضمن لشركائنا تحقيق أعلى مستويات الأداء والاستدامة والربحية.': 'عالمی معیار کی خدمات اور حل فراہم کرنا تاکہ ہمارے شراکت دار بہترین کارکردگی، پائیداری اور منافع حاصل کر سکیں۔',
+        'الشفافية، الجودة الشاملة، الالتزام بالتميز، وبناء علاقات طويلة الأمد مع عملائنا وشركائنا.': 'شفافیت، مکمل معیار، عمدگی کا عزم اور اپنے صارفین و شراکت داروں کے ساتھ طویل مدتی تعلقات۔',
+        'ربط الشركات بالفرص والشركاء المناسبين، وتسهيل الصفقات التجارية والاستثمارية الموثوقة.': 'کمپنیوں کو مناسب مواقع اور شراکت داروں سے جوڑنا اور قابل اعتماد تجارتی و سرمایہ کاری کے معاہدوں کو آسان بنانا۔',
+        'إدارة عمليات الاستيراد والتصدير والتجارة العامة عبر أسواق الإمارات والأسواق العالمية.': 'متحدہ عرب امارات اور عالمی منڈیوں میں درآمد، برآمد اور عمومی تجارت کے امور کا انتظام۔',
+        'حلول تسويقية رقمية للأفراد والشركات لبناء حضور أقوى والوصول إلى العملاء المناسبين.': 'افراد اور کمپنیوں کے لیے ڈیجیٹل مارکیٹنگ کے حل تاکہ مضبوط موجودگی اور مناسب صارفین تک رسائی حاصل ہو۔'
+    }
+};
+
+Object.entries(sharedLocalCopy).forEach(([language, values]) => Object.assign(localLanguagePacks[language] || (localLanguagePacks[language] = {}), values));
 
 function setupLanguageMenu() {
     const menu = document.getElementById('language-menu');

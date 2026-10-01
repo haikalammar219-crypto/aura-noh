@@ -726,6 +726,7 @@ function removeGoogleTranslationArtifacts() {
 
 removeGoogleTranslationArtifacts();
 setupLanguageMenu();
+setupBounceCards();
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
 translateText(savedLanguage);
 

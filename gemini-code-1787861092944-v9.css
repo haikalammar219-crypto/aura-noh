@@ -79,7 +79,7 @@ body.page-leaving {
     object-fit: contain;
     position: relative;
     z-index: 2;
-    filter: drop-shadow(0px 5px 16px rgba(212, 175, 55, 0.38));
+    filter: none;
 }
 
 .magic-rings-logo {
@@ -109,6 +109,12 @@ body.page-leaving {
     height: 108px;
     position: absolute;
     width: 190px;
+}
+
+.magic-rings-logo::before,
+.magic-rings-logo::after,
+.magic-ring {
+    display: none;
 }
 
 .magic-ring {
@@ -142,7 +148,7 @@ body.page-leaving {
 }
 
 .magic-rings-logo:hover .aura-logo-hero {
-    transform: scale(1.04);
+    transform: none;
 }
 
 @keyframes magic-ring-pulse {
@@ -531,17 +537,17 @@ section {
     height: 230px;
     left: 50%;
     overflow: hidden;
-    opacity: 1;
+    opacity: 0;
     position: absolute;
-    scale: 1;
+    scale: 0.35;
     top: 36px;
     transform-origin: 50% 100%;
-    transition: transform 380ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 380ms ease, z-index 0s;
+    transition: transform 460ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 460ms ease, z-index 0s;
     width: 230px;
 }
 
 .bounce-cards-container.is-visible .bounce-card {
-    animation: none;
+    animation: bounce-card-in 780ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .bounce-cards-container.is-visible .bounce-card-0 { animation-delay: 0ms; }

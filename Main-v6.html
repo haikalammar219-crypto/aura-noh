@@ -211,7 +211,7 @@
             </div>
             <form class="consultation-form" id="consultation-form" novalidate>
                 <label for="consultation-name">الاسم</label>
-                <input id="consultation-name" name="name" type="text" maxlength="80" placeholder="اكتب اسمك" autocomplete="name" required>
+                <input id="consultation-name" name="name" type="text" lang="und" maxlength="80" placeholder="اكتب اسمك" autocomplete="name" required>
                 <div class="phone-fields">
                     <div>
                         <label for="consultation-country">مفتاح الدولة</label>
@@ -225,7 +225,7 @@
                     </div>
                 </div>
                 <label for="consultation-email">البريد الإلكتروني</label>
-                <input id="consultation-email" name="email" type="email" maxlength="160" placeholder="name@example.com" autocomplete="email">
+                <input id="consultation-email" name="email" type="email" lang="und" maxlength="160" placeholder="name@example.com" autocomplete="email">
                 <label for="consultation-service">نوع الاستشارة</label>
                 <select id="consultation-service" name="service">
                     <option value="">اختر نوع الاستشارة</option>
@@ -261,7 +261,7 @@
                     </div>
                 </div>
                 <label for="review-name">الاسم</label>
-                <input id="review-name" name="name" type="text" maxlength="80" placeholder="اكتب اسمك" required>
+                <input id="review-name" name="name" type="text" lang="und" maxlength="80" placeholder="اكتب اسمك" required>
                 <label class="review-trap" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
                 <label>التقييم</label>
                 <div class="peek-rating" id="rating-picker" role="radiogroup" aria-label="اختر تقييمك">
@@ -276,7 +276,7 @@
                     </div>
                 </div>
                 <label for="review-comment">رسالتك</label>
-                <textarea id="review-comment" name="comment" maxlength="600" rows="4" placeholder="كيف كانت تجربتك معنا؟" required></textarea>
+                <textarea id="review-comment" name="comment" lang="und" maxlength="600" rows="4" placeholder="كيف كانت تجربتك معنا؟" required></textarea>
                 <button class="btn-contact review-submit" type="submit"><i class="fa-solid fa-paper-plane"></i><span>إرسال التقييم</span></button>
                 <p class="review-status" id="review-status" role="status"></p>
             </form>

@@ -81,7 +81,6 @@ export default {
 					FROM reviews
 					WHERE approved = 1
 					ORDER BY created_at DESC
-					LIMIT 30
 				`).all();
 				return withSecurityHeaders(Response.json({ reviews: results }));
 			}

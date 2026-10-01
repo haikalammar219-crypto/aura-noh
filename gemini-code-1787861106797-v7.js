@@ -154,10 +154,6 @@ function setupWarpText() {
     });
 }
 
-setupCardFlips();
-setupScrollReveal();
-setupBounceCards();
-
 const translations = {
     'عن الشركة': 'About the Company', 'مجالات العمل': 'Fields of Work', 'التواصل': 'Contact',
     'تواصل معنا': 'Contact Us', 'استكشف خدماتنا': 'Explore Our Services', 'تعرّف علينا': 'About Us',
@@ -732,7 +728,6 @@ removeGoogleTranslationArtifacts();
 setupLanguageMenu();
 const savedLanguage = localStorage.getItem('aura-language') || 'ar';
 translateText(savedLanguage);
-setupWarpText();
 
 const currentPage = window.location.pathname.split('/').pop() || 'Main-v6.html';
 document.querySelectorAll('nav a[href]').forEach(link => {
@@ -745,6 +740,18 @@ const reviewStatus = document.getElementById('review-status');
 const ratingPicker = document.getElementById('rating-picker');
 const ratingValue = document.getElementById('rating-value');
 const ratingTip = document.getElementById('rating-tip');
+const reviewComment = document.getElementById('review-comment');
+
+if (reviewComment) {
+    const resizeReviewComment = () => {
+        reviewComment.style.height = 'auto';
+        reviewComment.style.height = `${reviewComment.scrollHeight}px`;
+    };
+    reviewComment.addEventListener('input', resizeReviewComment);
+    reviewForm.addEventListener('reset', () => requestAnimationFrame(resizeReviewComment));
+    resizeReviewComment();
+}
+
 const ratingLabels = {
     ar: ['ضعيف', 'مقبول', 'جيد', 'رائع', 'ممتاز'], en: ['Poor', 'Fair', 'Good', 'Great', 'Superb'],
     es: ['Mala', 'Regular', 'Buena', 'Muy buena', 'Excelente'], fr: ['Faible', 'Moyenne', 'Bonne', 'Très bonne', 'Excellente'],
